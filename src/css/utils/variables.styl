@@ -1,0 +1,81 @@
+// http://stylus-lang.com/docs/hashes.html
+
+$max-width = 1440px;
+
+$colors = {
+  headline: #000000,
+  text: #000000,
+  background: #ffffff,
+}
+
+// $padding = {
+//   xs: 10px, // you can loop this and call, but key needs to match breakpoint!
+//   sm: 20px,
+//   md: 40px,
+//   lg: 80px,
+// };
+//
+// $margins = {
+//   xs: 46px,
+//   sm: 60px,
+//   md: 100px,
+//   lg: 120px,
+// };
+
+
+// DEFINE Breakpoints
+$breakpoints = {
+  xs: 0px,        // mobile
+  sm: 767px,      // tablet
+  md: 1024px,     // notebook
+  lg: 1440px      // desktop
+};
+
+
+
+/**
+EXAMPLE
+.class {
+	xs() {color:red}
+	sm() {color:blue}
+	md() {color:green}
+	lg() {color:black}
+}
+**/
+
+
+// Using loops and functions together with breakpoints.
+for breakpoint in keys($breakpoints) {
+  define(breakpoint, @() {
+    mq(, block);
+  })
+}
+
+// Media Queries function
+mq(mq = called-from, block = block) {
+  @media all and (min-width: $breakpoints[mq]) {
+    {block}
+  }
+}
+
+/*
+EXAMPLE:
+.demo {
+	// Set margin for all breakpoints
+	for breakpoint, value in $margins {
+    +mq(breakpoint) {
+      margin: value;
+    }
+  }
+
+	for breakpoint, value in $padding.scene {
+    +mq(breakpoint) {
+      padding: value;
+    }
+  }
+
+	font-size: 10px;
+	+md() { font-size: 20px; }
+	+lg() { font-size: 20px; }
+}
+*/

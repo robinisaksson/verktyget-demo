@@ -1,0 +1,46 @@
+{
+  "name": "FontLoading",
+  "version": "0.0.1",
+  "description": "Font loading test",
+  "author": "Robin Isaksson",
+  "scripts": {
+    "create": "mkdir -p build/{js,css}",
+    "livereload": "livereload build --debug",
+    "server": "http-server build -p 8000",
+    "prestart": "npm run create",
+    "start": "npm run livereload | npm run server | npm run watch:css | npm run watch:js | npm run watch:files",
+    "watch:css": "stylus --watch -u autoprefixer-stylus src/css/app.styl --out build/css/bundle.css",
+    "watch:files": "cpx 'src/{*.html,assets/**/*}' build/ --watch",
+    "watch:js": "watchify src/js/app.js --debug --verbose --outfile build/js/bundle.js --transform [ browserify-shim ] --transform [ babelify --only src/js --presets env ] --plugin [ livereloadify-script ]",
+    "prebuild": "npm run eslint && npm run create",
+    "build": "npm run build:css | npm run build:js | npm run build:files",
+    "build:css": "stylus -u autoprefixer-stylus src/css/app.styl --out build/css/bundle.css --compress",
+    "build:files": "cpx --verbose 'src/{*.html,assets/**/*}' build/",
+    "build:js": "browserify src/js/app.js --transform [ browserify-shim ] --transform [ babelify --only src/js --presets env ] | uglifyjs -c > build/js/bundle.js",
+    "eslint": "eslint src/js/**; exit 0"
+  },
+  "browser": {},
+  "browserify-shim": {},
+  "dependencies": {
+    "gsap": "^1.20.3",
+    "scrollmagic": "^2.0.5",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.2",
+    "autoprefixer-stylus": "^0.11.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "browserify-shim": "^3.8.14",
+    "core-js": "^2.5.1",
+    "cpx": "^1.5.0",
+    "eslint": "^3.10.2",
+    "http-server": "^0.9.0",
+    "livereload": "^0.6.0",
+    "livereloadify-script": "^1.0.0",
+    "stylus": "^0.54.5",
+    "uglify-js": "^3.0.23",
+    "watchify": "^3.7.0"
+  }
+}
