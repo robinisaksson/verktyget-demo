@@ -18,14 +18,23 @@ h1 {
 
 	.hero {
 		width: 100%;
-		height: 100vh;
-		background:grey;
+		height: 80vh;
 
 		.media {
-			width:100%;
-			height:300px;
+			// Move to JS
+			position: relative;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center center;
+			background-image: url('/assets/img/cover.png')
 
 			video {
+				// Move to JS
+				position: absolute;
+
 				width:100%;
 				height:auto;
 			}

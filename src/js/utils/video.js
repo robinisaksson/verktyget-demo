@@ -21,7 +21,6 @@ class Video extends EventDispatcher {
       autoplay:true,
       loop:true,
       videoAspect: 16/9,
-      mediaAspect: 3/2,
       size: 'cover' || 'contain '
     }
     */
@@ -54,16 +53,11 @@ class Video extends EventDispatcher {
     }
 		this.options = Object.assign(this.options, options); // Merge
 
-
-    // Container
-    this.containerNode = DOM.Create('div', {'class':'video-container'});
-    DOM.Style(this.containerNode, {overflow:'hidden'});
-    DOM.Add(this.containerNode, this.node);
-
     // Video loader
     this.videoLoader = new ResponsiveVideoLoader(this.urls, this.sizes);
     this.videoLoader.addEventListener('complete', this.onVideoLoaded);
 
+    // bajs
     // window.requestAnimationFrame(this.setSize);
     // this.setSize()
   }
@@ -77,7 +71,6 @@ class Video extends EventDispatcher {
     console.log('here: ', this.videoLoader);
     // Add video
     this.videoNode = this.videoLoader.getHTML();
-    DOM.Add(this.containerNode, this.videoNode);
 
     this.videoNode.volume = this.options.volume;
     if (this.options.loop === true) this.videoNode.loop = true;
@@ -96,7 +89,6 @@ class Video extends EventDispatcher {
     // // Cover
     // this.coverNode = DOM.Create('div', {"class":'video-cover'});
     // DOM.Style(this.coverNode, {width:this.width+'px', height:this.height+'px'});
-    // DOM.Add(this.containerNode, this.coverNode);
     //
     // this.imageLoader = new ImageLoader(this.coverUrl);
     // this.imageLoader.addEventListener('complete', this.onCoverLoaded);
@@ -105,28 +97,24 @@ class Video extends EventDispatcher {
   }
 
   executeCover() {
-
   }
-
-
-
 
 
 
   // ---------------------------- Public functions ----------------------------
 
-  getHTML() {
-    return this.containerNode;
-  }
+  // getHTML() {}
 
   makeAutoplay() {
+
+    // Mobile autoplay works when:
+    // volume: 0
+    // playsinline: 1
+
     this.autoplay = true;
     if (this.videoNode !== undefined) {
       this.videoNode.autoplay = true;
     }
-    // if (DeviceInfo.IsMobileDevice === false) {
-    //     this.videoNode.autoplay = true;
-    // }
   }
 
   setLoop(isLooping) {
@@ -135,9 +123,6 @@ class Video extends EventDispatcher {
       this.videoNode.loop = isLooping;
     }
   }
-
-
-
   play() {
     if (this.videoNode !== undefined) {
       this.videoNode.play();
@@ -148,7 +133,6 @@ class Video extends EventDispatcher {
       this.videoNode.pause();
     }
   }
-
   togglePlayPause() {
     if (this.isPlaying() === true) {
       this.pause();
@@ -162,16 +146,12 @@ class Video extends EventDispatcher {
     this.videoNode.pause();
     this.seekTo(0);
   }
-
-  seekTo(value) {
+  seek(value) {
     this.videoNode.currentTime = value;
   }
-
   isPlaying() {
-    // console.log("isPaused: " + this.videoNode.paused);
     return this.videoNode.paused ? false : true;
   }
-
   getDuration() {
     return this.videoNode.duration;
   }
@@ -202,52 +182,33 @@ class Video extends EventDispatcher {
   }
 
 
-  setAspectRatio(videoAspect, mediaAspect) {
-
-    this.options.videoAspect = videoAspect;
-    this.options.containerAspect = (mediaAspect === undefined) ? videoAspect : mediaAspect;
+  setVideoSize(size) {
+    this.options.size = size;
+    this.setSize();
   }
 
 
 
   setSize() {
 
-    this.width = this.node.offsetWidth;
-    this.height = this.width/this.options.containerAspect;
-    console.log(this.width, this.height, this.options.containerAspect);
-    DOM.Style(this.containerNode, {width:this.width+'px', height:this.height+'px'});
-    // this.width = width;
-    // this.height = this.width/this.options.videoAspect;
+    this.size = DeviceInfo.GetSize();
+    // this.isMobile = this.size.x < 767 ? true : false;
+    var width = this.node.offsetWidth;
+    var height = this.node.offsetHeight;
+    var as = width/height;
 
-    // Container
-    //DOM.Style(this.containerNode, {width:this.width+'px', height:this.height+'px'});
-
-    // <video> 'covers' container
-    if (this.options.videoAspect !== this.options.containerAspect) {
-
-      // Portrait format
-      console.log(this.videoNode);
-      if (this.options.videoAspect < this.options.containerAspect) {
-        DOM.Style(this.videoNode, {
-          width: this.height * this.options.containerAspect+'px',
-          height: this.height+'px',
-          marginTop: 0,
-          marginLeft: -(this.height * this.options.containerAspect - this.width) / 2+'px'
-      });
-
-      // Landscape format
-      } else {
-        DOM.Style(this.videoNode, {
-          width: this.width+'px',
-          height: this.width/this.options.containerAspect+'px',
-          marginTop: -(this.width * this.options.containerAspect - this.height) / 2+'px',
-          marginLeft: 0
-        });
-      }
+    // Portrait
+    if (as > this.options.videoAspect && this.options.size === 'conatain' || as < this.options.videoAspect && this.options.size === 'cover') {
+      var marginLeft = Math.round(((height*this.options.videoAspect) - width) / 2);
+      var width = Math.round(this.options.videoAspect*height); // (16/9)*1080 = 1920
+      DOM.Style(this.videoNode, {width: width+'px', height:height+'px', marginLeft:-marginLeft+'px', marginTop:'0px'});
     }
-
-    // Video size bajs
-    this.videoLoader.setSize(this.width);
+    // Landscape
+    else {
+      var videoHeight = Math.round(width/this.options.videoAspect); // 1920/(16/9) = 1080
+      var marginTop = (height/2) - (videoHeight/2) // videoHeight/2 - window.height/2;
+      DOM.Style(this.videoNode, {width: width+'px', height: videoHeight+'px', marginLeft:'0px', marginTop: marginTop+'px'});
+    }
 
     // if (cover) {
     //   this.imageLoader.updateSize();
@@ -259,8 +220,8 @@ class Video extends EventDispatcher {
 
   // ------------------ Private functions ---------------------------
   onVideoLoaded(event) {
-    console.log('onVideoLoaded');
-    // this.setSize(this.width);
+    console.log('onVideoLoaded ', this.width);
+    this.setSize(this.width);
     this.dispatchEvent({type:'complete', target:this});
   }
 

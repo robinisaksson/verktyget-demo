@@ -40,9 +40,7 @@ class Hero {
 		var options = {
 			autoplay:true,
       loop:true,
-      videoAspect: 1920/800,
-      mediaAspect: 16/9,
-			size: 'cover'
+      videoAspect: 1920/800 // 16/9*
 		}
 		this.video = new Video(this.mediaNode, videoUrls, videoSizes, options); // node, urls, sizes, options
 		this.video.addEventListener('complete', this.onVideoLoaded);
@@ -56,28 +54,21 @@ class Hero {
 	}
 
 	onEnter(event) {
-
 		// play
+		this.video.play();
 	}
 
 	onLeave(event) {
     // pause
+		this.video.pause();
 	}
 
   onVideoLoaded(event) {
-    // console.log('image loaded !! ', event.target.image.src);
+    // console.log('video loaded !!');
 		console.log(event.target.videoNode);
-		DOM.Add(event.target.videoNode, this.node);
+		DOM.Add(event.target.videoNode, this.mediaNode);
+		this.video.seek(5);
 		this.video.play();
-    // this.isImageLoaded = true;
-    // this.image.src = event.target.image.src;
-    // this.detector.setSize();
-    //
-    // if (this.isFontLoaded) {
-    //   this.h3.innerHTML = 'Font & image loaded';
-    // } else {
-    //   this.h3.innerHTML = 'Image loaded';
-    // }
 	}
 
 	// SCROLL
@@ -92,7 +83,8 @@ class Hero {
 
     this.detector.setSize();
 
-		this.video.setSize(this.node.offsetWidth);
+		this.video.setSize();
+		this.video.setVideoSize('cover');
 	}
 
 }
