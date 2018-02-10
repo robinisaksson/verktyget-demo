@@ -69,29 +69,6 @@ class ResponsiveImageLoader extends EventDispatcher {
 
 
   updateSize(mediaWidth) {
-
-    // this.size = DeviceInfo.GetSize();
-    // var mediaWidth = (nodeWidth === undefined) ? this.size.x : nodeWidth*devicePixelRatio; // Fallback to screen size
-    //
-    // var i, url;
-    // for (i = 0; url = this.urls[i]; i++) {
-    //   if (mediaWidth < this.sizes[i]) {
-    //     this.url = url;
-    //     break;
-    //   }
-    // }
-    // if (url === undefined) {
-    //   console.log('Warning, image might be low-res. Node width: ', mediaWidth, '  Image width: ', this.sizes[this.sizes.length-1]);
-    //   url = this.urls[this.sizes.length-1];
-    // }
-    //
-    // if (this.url !== url) {
-    //   this.url = url;
-    //   this.imageLoader.setUrl(url);
-    //   this.imageLoader.execute();
-		// 	console.log('LOAD NEW URL: ', url);
-    // }
-
     this.execute(mediaWidth, false);
   }
 

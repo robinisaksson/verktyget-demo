@@ -6,9 +6,9 @@ import DOM from '../utils/dom';
 import DeviceInfo from '../utils/device-info';
 import ResponsiveVideoLoader from '../utils/responsive-video-loader';
 import ScrollDetector from '../scroll-detector';
-
-// import Video from '../utils/video';
+import Video from '../utils/video';
 // import {MapValueInRange} from './utils/math';
+
 
 class Hero {
 
@@ -17,11 +17,7 @@ class Hero {
 
 		this.onEnter = this.onEnter.bind(this);
     this.onLeave = this.onLeave.bind(this);
-    this.onFontLoaded = this.onFontLoaded.bind(this);
-    this.onFontError = this.onFontError.bind(this);
     this.onVideoLoaded = this.onVideoLoaded.bind(this);
-    this.onWithin = this.onWithin.bind(this);
-
 
     this.size = DeviceInfo.GetSize();
     this.scroll = DeviceInfo.GetScroll();
@@ -35,9 +31,23 @@ class Hero {
     this.imageUrls = [imgSm, imgMd, imgLg];
     this.imageSizes = [300, 600, 800];
 
-    // Image loader
-    this.videoLoader = new ResponsiveVideoLoader(this.imageUrls, this.imageSizes);
-    this.videoLoader.addEventListener('complete', this.onVideoLoaded);
+		// Video
+
+		var vidSm = this.mediaNode.getAttribute('data-video-sm');
+    var vidMd = this.mediaNode.getAttribute('data-video-md');
+    var videoUrls = [vidSm, vidMd];
+    var videoSizes = [720, 1080];
+		var options = {
+			autoplay:true,
+      loop:true,
+      videoAspect: 1920/800,
+      mediaAspect: 16/9,
+			size: 'cover'
+		}
+		this.video = new Video(this.mediaNode, videoUrls, videoSizes, options); // node, urls, sizes, options
+		this.video.addEventListener('complete', this.onVideoLoaded);
+		this.video.execute(this.node.offsetWidth);
+
 
     // Check Scroll
     this.detector = new ScrollDetector(node, {triggerY: 0.5}, true);
@@ -46,6 +56,7 @@ class Hero {
 	}
 
 	onEnter(event) {
+
 		// play
 	}
 
@@ -55,15 +66,18 @@ class Hero {
 
   onVideoLoaded(event) {
     // console.log('image loaded !! ', event.target.image.src);
-    this.isImageLoaded = true;
-    this.image.src = event.target.image.src;
-    this.detector.setSize();
-
-    if (this.isFontLoaded) {
-      this.h3.innerHTML = 'Font & image loaded';
-    } else {
-      this.h3.innerHTML = 'Image loaded';
-    }
+		console.log(event.target.videoNode);
+		DOM.Add(event.target.videoNode, this.node);
+		this.video.play();
+    // this.isImageLoaded = true;
+    // this.image.src = event.target.image.src;
+    // this.detector.setSize();
+    //
+    // if (this.isFontLoaded) {
+    //   this.h3.innerHTML = 'Font & image loaded';
+    // } else {
+    //   this.h3.innerHTML = 'Image loaded';
+    // }
 	}
 
 	// SCROLL
@@ -76,12 +90,9 @@ class Hero {
 	setSize(event) {
 		this.size = DeviceInfo.GetSize();
 
-    // this.detector.setSize();
+    this.detector.setSize();
 
-    // // Load new image if it's visible
-    // if (this.detector.isWithin === true) {
-    //   this.imageLoader.updateSize(this.node.offsetWidth);
-    // }
+		this.video.setSize(this.node.offsetWidth);
 	}
 
 }

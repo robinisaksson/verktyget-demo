@@ -39,7 +39,7 @@ class Main {
 		this.hero = new Hero(this.heroNode);
 
 		this.modules = [];
-		this.nodes = document.querySelectorAll('.font-module');
+		this.nodes = document.querySelectorAll('.grid-module');
 		var i, node;
 		for (i = 0;  node = this.nodes[i]; i++) {
 			var module = new GridModule(node, i);
