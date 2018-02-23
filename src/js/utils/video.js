@@ -65,12 +65,9 @@ class Video extends EventDispatcher {
 
   execute(nodeWidth, firstLoad = true) {
 
-
-    this.videoLoader.execute();
-
-    console.log('here: ', this.videoLoader);
     // Add video
     this.videoNode = this.videoLoader.getHTML();
+    this.videoLoader.execute(this.videoNode.offsetWidth);
 
     this.videoNode.volume = this.options.volume;
     if (this.options.loop === true) this.videoNode.loop = true;
@@ -209,6 +206,8 @@ class Video extends EventDispatcher {
       var marginTop = (height/2) - (videoHeight/2) // videoHeight/2 - window.height/2;
       DOM.Style(this.videoNode, {width: width+'px', height: videoHeight+'px', marginLeft:'0px', marginTop: marginTop+'px'});
     }
+
+    this.videoLoader.setSize(width);
 
     // if (cover) {
     //   this.imageLoader.updateSize();

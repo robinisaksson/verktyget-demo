@@ -66,12 +66,10 @@ class ResponsiveVideoLoader extends EventDispatcher {
     // console.log(newUrl);
     if (this.url !== newUrl || firstLoad === true) {
       this.url = newUrl;
-      // this.imageLoader.setUrl(this.url);
-      // this.imageLoader.execute();
 
       this.videoLoader.setUrl(this.url);
       this.videoLoader.execute();
-			console.log('LOAD NEW VIDEO: ', url);
+			console.log('LOAD NEW VIDEO: ', this.url);
     }
 
   }
@@ -86,7 +84,7 @@ class ResponsiveVideoLoader extends EventDispatcher {
 
   setSize(nodeWidth) {
 
-    this.execute(nodeWidth);
+    this.execute(nodeWidth, false);
   }
 }
 
