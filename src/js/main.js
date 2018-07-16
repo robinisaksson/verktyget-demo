@@ -1,20 +1,19 @@
-// Vendor
-// import scrollMonitor from 'scrollmonitor';
-
 // UTILS
-import DOM from './utils/dom';
-import DeviceInfo from './utils/device-info';
-import FontLoader from './utils/font-loader';
-import ScrollDetector from './scroll-detector';
+import {DOM} from 'verktyget';
+import {DeviceInfo} from 'verktyget';
+import {EventDispatcher} from 'verktyget';
+// import ScrollDetector from './scroll-detector';
+
 
 // Project
 import GridModule from './modules/grid-module';
 import Hero from './modules/hero';
-// import {MapValueInRange} from './utils/math';
+
 
 class Main {
 
 	constructor() {
+		
 		console.log('init main');
 
 		this.onScroll = this.onScroll.bind(this);
@@ -26,18 +25,14 @@ class Main {
 
 		this.size = DeviceInfo.GetSize();
 		this.scroll = DeviceInfo.GetScroll();
-
-		// Variables
-		this.iOS = /iPad|iPhone|iPod/.test(navigator.platform),
-
-
+		
 		// NODES
 		this.contentNode = document.getElementById('content');
 		this.sceneNode = document.querySelector('.scene');
 
 		this.heroNode = document.querySelector('.hero');
 		this.hero = new Hero(this.heroNode);
-
+		
 		this.modules = [];
 		this.nodes = document.querySelectorAll('.grid-module');
 		var i, node;

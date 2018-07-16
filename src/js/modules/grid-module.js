@@ -1,13 +1,18 @@
 // Vendor
 import TweenMax from 'gsap';
 import TimelineMax from 'gsap/TimelineMax';
+import FontLoader from '../utils/font-loader';
 
 // UTILS
-import DOM from '../utils/dom';
-import DeviceInfo from '../utils/device-info';
-import FontLoader from '../utils/font-loader';
-import ResponsiveImageLoader from '../utils/responsive-image-loader';
-import ScrollDetector from '../scroll-detector';
+// import DOM from '../utils/dom';
+// import DeviceInfo from '../utils/device-info';
+// import FontLoader from '../utils/font-loader';
+// import ResponsiveImageLoader from '../utils/responsive-image-loader';
+// import ScrollDetector from '../scroll-detector';
+import {DOM} from 'verktyget';
+import {DeviceInfo} from 'verktyget';
+import {ResponsiveImageLoader} from 'verktyget';
+import {ScrollDetector} from '../scroll-detector';
 
 // import Video from '../utils/video';
 // import {MapValueInRange} from './utils/math';
@@ -15,7 +20,7 @@ import ScrollDetector from '../scroll-detector';
 class GridModule {
 
 	constructor(node, order) {
-		console.log('init module');
+		console.log('init grid module');
 
 		this.onEnter = this.onEnter.bind(this);
     this.onLeave = this.onLeave.bind(this);
@@ -118,7 +123,7 @@ class GridModule {
   onImageLoaded(event) {
     // console.log('image loaded !! ', event.target.image.src);
     this.isImageLoaded = true;
-    this.image.src = event.target.image.src;
+    this.image.src = event.target.src;
     this.detector.setSize();
 
     if (this.isFontLoaded) {

@@ -2,9 +2,9 @@
 import TweenMax from 'gsap';
 import TimelineMax from 'gsap/TimelineMax';
 
-import EventDispatcher from './utils/event-dispatcher';
-import DeviceInfo from './utils/device-info';
-import DOM from './utils/dom';
+import {EventDispatcher} from 'verktyget';
+import {DeviceInfo} from 'verktyget';
+import {DOM} from 'verktyget';
 
 export class ScrollDetector extends EventDispatcher {
 
@@ -28,6 +28,10 @@ export class ScrollDetector extends EventDispatcher {
 		this.isWithin = false;
 		this.fromBottom = false;
 		this.fromTop = false;
+		this.position = {
+			top: 0,
+			bottom: 0
+		}
 		// this.previousY = this.scroll.y; // Used for scroll direction
 		// this.scrollDirection; // up, down
 

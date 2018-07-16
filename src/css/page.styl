@@ -6,7 +6,7 @@
 // 	background-color:red;
 	// }
 body {
-	background: lightGrey;
+	background: #fff;
 }
 h1 {
 	text-align: center;
@@ -84,9 +84,14 @@ h1 {
 				padding-bottom: 10px;
 			}
 			p {
+				display: none;
 				padding-bottom: 2em;
 				max-width: 480px;
 				width: 100%;
+				
+				+sm() {
+					display: block;
+				}
 			}
 		}
 	}

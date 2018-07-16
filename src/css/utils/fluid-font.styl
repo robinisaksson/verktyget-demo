@@ -1,0 +1,72 @@
+/**
+FluidFont v0.1
+
+Example usage:
+
+.my-class {
+	FluidFontStart(320, 639, 16, 16);
+	FluidFontStep(640, 1024, 16, 18);
+	FluidFontStep(1025, 1440, 18, 24);
+	FluidFontEndless(1440, 24, .2);
+}
+*/
+
+
+
+FluidFontStart(minWidth, maxWidth, minSize, maxSize) {
+	
+	font-size: minSize px;
+	
+	FluidFontStep(minWidth, maxWidth, minSize, maxSize);
+}
+
+
+
+FluidFontStep(minWidth, maxWidth, minSize, maxSize) {
+	
+	widthDif = maxWidth - minWidth;
+	sizeDif = maxSize - minSize;
+	
+	widthAspect = widthDif / minWidth;
+	sizeAspect = sizeDif / minSize;   
+	
+	aspect = sizeAspect/widthAspect;
+	
+	baseCalc = unit(minSize, "px");
+	additionCalc = ((minSize/minWidth)*100)vw;
+	
+	propCalcString = "calc(%s + ((%s - %s) * %s ))" % (baseCalc additionCalc baseCalc aspect);
+	
+	
+	// control check..
+	//padding-bottom: baseCalc + (((minSize/minWidth)*maxWidth) - baseCalc) * aspect;
+	
+	mediaProp = "(min-width: "+unit(minWidth, 'px')+") and (max-width: "+unit(maxWidth, "px")+")";
+	@media mediaProp {
+		font-size: propCalcString;
+	}
+	
+}
+
+
+FluidFontEnd(maxWidth, maxSize) {
+	
+	mediaProp = "(min-width: "+unit(maxWidth, 'px')+")";
+	@media mediaProp {
+		font-size: unit(maxSize, 'px');
+	}
+	
+}
+
+FluidFontEndless(maxWidth, maxSize, multiply) {
+	
+	baseCalc = unit(maxSize, "px");
+	additionCalc = ((maxSize/maxWidth)*100)vw;
+	
+	propCalcString = "calc(%s + ((%s - %s) * %s ))" % (baseCalc additionCalc baseCalc multiply);
+	
+	mediaProp = "(min-width: "+unit(maxWidth, 'px')+")";
+	@media mediaProp {
+		font-size: propCalcString;
+	}
+}

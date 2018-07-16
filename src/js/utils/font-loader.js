@@ -1,5 +1,5 @@
 import WebFont from "webfontloader";
-import EventDispatcher from './event-dispatcher';
+import {EventDispatcher} from 'verktyget';
 
 export class FontLoader extends EventDispatcher {
 

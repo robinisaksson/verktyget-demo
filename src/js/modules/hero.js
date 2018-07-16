@@ -2,23 +2,22 @@
 // import TweenMax from 'gsap';
 
 // UTILS
-import DOM from '../utils/dom';
-import DeviceInfo from '../utils/device-info';
-import ResponsiveVideoLoader from '../utils/responsive-video-loader';
-import ScrollDetector from '../scroll-detector';
-import Video from '../utils/video';
+import {DOM, DeviceInfo, Video} from 'verktyget';
+// import {ResponsiveVideoLoader, Video} from 'verktyget';
 // import {MapValueInRange} from './utils/math';
+
+import ScrollDetector from '../scroll-detector';
 
 
 class Hero {
 
 	constructor(node) {
-		console.log('init module');
-
+		console.log('init Hero');
+		
 		this.onEnter = this.onEnter.bind(this);
     this.onLeave = this.onLeave.bind(this);
     this.onVideoLoaded = this.onVideoLoaded.bind(this);
-
+		
     this.size = DeviceInfo.GetSize();
     this.scroll = DeviceInfo.GetScroll();
     this.node = node;
@@ -32,7 +31,6 @@ class Hero {
     this.imageSizes = [300, 600, 800];
 
 		// Video
-
 		var vidSm = this.mediaNode.getAttribute('data-video-sm');
     var vidMd = this.mediaNode.getAttribute('data-video-md');
     var videoUrls = [vidSm, vidMd];
@@ -65,7 +63,7 @@ class Hero {
 
   onVideoLoaded(event) {
     // console.log('video loaded !!');
-		console.log(event.target.videoNode);
+		// console.log(event.target.videoNode);
 		DOM.Add(event.target.videoNode, this.mediaNode);
 		this.video.seek(5);
 		this.video.play();

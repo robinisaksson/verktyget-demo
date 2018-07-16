@@ -1,10 +1,15 @@
 import Main from "./main";
 import WebFont from "webfontloader";
 
+
+import { DOM } from 'verktyget';
+import { DeviceInfo } from 'verktyget';
+
+
 class Application {
 
   constructor() {
-
+    
     // Modern browsers IE 9+
     if (window.addEventListener) {
 
@@ -18,7 +23,9 @@ class Application {
       // Fallback solution..
       window.onload = this.CreateFallback.bind(this);
     }
-
+    
+    
+  
     // FONT LOADING
     // loading - This event is triggered when all fonts have been requested.
     // active - This event is triggered when the fonts have rendered.
@@ -36,22 +43,22 @@ class Application {
       active: () => {
           this.OnAllFontsComplete();
       },
-      // GOOGLE FONTS
+      // // GOOGLE FONTS
       // google: {
-      //   families: ['Rozha One', 'Roboto Condensed'],
-      // },
+      //   families: ['Roboto:400,500'],
+      // }
       // FROM CSS
       custom: {
         // families: ['No5', 'Home Text', 'Barrio', 'Baloo', 'Amaranth', 'Aladin', 'Advent', 'Acme'],
-        families: ['Home Text'], // Loaded other fonts onScroll
+        families: ['Home Text'],
         urls: ['../css/bundle.css'],
       }
     };
     WebFont.load(config);
   }
-
+  
   CreateFallback() {
-
+    // IE8 stuff
   }
 
   OnFontFail(familyName, fvd) {
@@ -79,7 +86,7 @@ class Application {
   }
 
   Init() {
-    new Main();
+    new Main(); // Lets begin - Main.js
   }
 
 }
