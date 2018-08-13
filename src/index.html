@@ -16,7 +16,7 @@
 
 		<script>
 		// FPS METER - https://github.com/mrdoob/stats.js/
-		javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+		// javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
 		</script>
 		
 	</head>
@@ -28,412 +28,204 @@
 
 			<div id="content">
 
+				<!-- 
 				<div id="loader">
 					<div class="spinner"></div>
-					<p></p>
 				</div>
-
+				-->
 
 				<div class="scene">
-
-					<div class="hero">
-						<div class="media" data-video-sm="assets/video/hero-720.mp4" data-video-md="assets/video/hero-1080.mp4"></div>
+					
+					<div class="module introduction">
+						<div class="copy">
+							<h1 class="responsive-font">verktyget</h1>
+							<p>
+								<strong>verktyget</strong> - "the tool" is a bunch of useful es6 javascript modules. this demo site shows how you can use the different modules. i have tried to use as much of the functionality as possible without creating to much complexity. you can always contact me with your questions.  
+							</p>	
+						</div>
+						
+						<div class="copy">
+							<h2>overview</h2>
+							<p>
+								these are the classes or modules that you can use in your project. 
+							</p>
+							<br/>
+							
+							<ul>
+								<li>event dispatcher</li>
+								<li>dom helpers</li>
+								<li>device info</li>
+								<li>image loader</li>
+								<li>video loader</li>
+								<li>video player</li>
+								<li>jsonp loading</li>
+								<li>ajax loading</li>
+								<li>url helper</li>
+								<li>scroll detection</li>
+							</ul>
+						</div>
+						
 					</div>
-
-
-					<div class="grid-container">
-						<h1 class="responsive-font">Font loading test</h1>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
+					
+					
+					<div class="module image-loader">
+						
+						<div class="copy">
+							<h2>image loader</h2>
+							<p>knowing if & when assets are loaded are crucial to any frontend. below is a simple example of loading a image.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
 						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
+						
+						<div class="media" data-image-url="assets/img/img-loader-highres.jpg">
+							<img src="assets/img/img-loader-thumbnail.jpg" alt="Image loader example" />
 						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
-						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
-						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
-						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
-						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
-						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
-						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
-						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
-						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<div class="grid-module no5" data-font-name="No5">
-							<h2>No5</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-1-sm.png" data-image-md="assets/img/icon-1-md.png" data-image-lg="assets/img/icon-1-lg.png">
-								<img src="assets/img/thumb-1.png" />
-							</div>
-						</div>
-
-						<div class="grid-module barrio" data-font-name="Barrio">
-							<h2>Barrio</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-2-sm.png" data-image-md="assets/img/icon-2-md.png" data-image-lg="assets/img/icon-2-lg.png">
-								<img src="assets/img/thumb-2.png" />
-							</div>
-						</div>
-
-						<div class="grid-module baloo" data-font-name="Baloo">
-							<h2>Balooo</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-3-sm.png" data-image-md="assets/img/icon-3-md.png" data-image-lg="assets/img/icon-3-lg.png">
-								<img src="assets/img/thumb-3.png" />
-							</div>
-						</div>
-
-						<div class="grid-module amaranth" data-font-name="Amaranth">
-							<h2>Amaranth</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-4-sm.png" data-image-md="assets/img/icon-4-md.png" data-image-lg="assets/img/icon-4-lg.png">
-								<img src="assets/img/thumb-4.png" />
-							</div>
-						</div>
-
-						<div class="grid-module aladin" data-font-name="Aladin">
-							<h2>Aladin</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-5-sm.png" data-image-md="assets/img/icon-5-md.png" data-image-lg="assets/img/icon-5-lg.png">
-								<img src="assets/img/thumb-5.png" />
-							</div>
-						</div>
-
-						<div class="grid-module advent" data-font-name="Advent">
-							<h2>Advent</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-6-sm.png" data-image-md="assets/img/icon-6-md.png" data-image-lg="assets/img/icon-6-lg.png">
-								<img src="assets/img/thumb-6.png" />
-							</div>
-						</div>
-
-						<div class="grid-module acme" data-font-name="Acme">
-							<h2>Acme</h2>
-							<h3>Not loaded, not active</h3>
-							<p>Pulvinar felis, facilisis eleifend ante viverra et. Pellentesque pretium malesuada mauris.</p>
-							<div class="media" data-image-sm="assets/img/icon-7-sm.png" data-image-md="assets/img/icon-7-md.png" data-image-lg="assets/img/icon-7-lg.png">
-								<img src="assets/img/thumb-7.png" />
-							</div>
-						</div>
-
-						<p class="no5">This font is typed in No5</p>
-						<p class="home-text">This font is typed in HOME Text</p>
-						<p class="barrio">This font is typed in Barrio</p>
-						<p class="baloo">This font is typed in Baloo</p>
-						<p class="amaranth">This font is typed in Amaranth</p>
-						<p class="aladin">This font is typed in Aladin</p>
-						<p class="advent">This font is typed in Advent</p>
-						<p class="acme">This font is typed in Acme</p>
-
 					</div>
+					
+					
+					<div class="module responsive-image-loader">
+						
+						<div class="copy">
+							<p>when you have different assets depending on viewport size, then its nice to have a responsive image loader.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						
+						<div class="images">
+							<div class="media" data-root-url="assets/img/img-loader-2">
+								<img src="assets/img/img-loader-2-thumb.jpg" alt="Image loader example" />
+							</div>
+							
+							<div class="media" data-root-url="assets/img/img-loader-3">
+								<img src="assets/img/img-loader-3-thumb.jpg" alt="Image loader example" />
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="module video-loader">
+						
+						<div class="copy">
+							<h2>video loader</h2>
+							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="media" data-video-url="assets/video/video-loader.mp4"></div>
+						
+					</div>
+					
+					<div class="module video-player">
+						
+						<div class="copy">
+							<h2>video player</h2>
+							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="videos">
+							<div class="media" data-video-desktop="assets/video/video-1-desktop.mp4" data-video-mobile="assets/video/video-1-mobile.mp4"></div>
+							<div class="media" data-video-desktop="assets/video/video-2-desktop.mp4" data-video-mobile="assets/video/video-2-mobile.mp4"></div>
+						</div>
+					</div>
+					
+					<div class="module video-hero">
+						<div class="media" data-video-desktop="assets/video/hero-1920.mp4" data-video-mobile="assets/video/hero-1366.mp4"></div>
+					</div>
+					
+					<div class="module video-player-ui">
+						
+						<div class="copy">
+							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="media"  data-root-url="assets/video/video-3">
+							<!-- video 3 -->
+						</div>
+					</div>
+					
+					
+					<div class="module scroll-detection">
+						
+						<div class="copy">
+							<h2>scroll detection</h2>
+							<p>after loading being able to detect the scroll position, check if user is above, ontop or below the content is extremely userful. lorem ipsum dolor set. lorem ipsum dolor set<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="scroll-demo">
+							<div class="box-1"></div>
+							<div class="box-2"></div>
+							<div class="box-3"></div>
+						</div>
+					</div>
+					
+					<div class="module scroll-animation">
+						
+						<div class="copy">
+							<p>when doing paralax scrolling or when you want animated a value based on the scroll position.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="scroll-demo">
+							<div class="box-1"></div>
+							<div class="box-2"></div>
+							<div class="box-3"></div>
+						</div>
+					</div>
+					
+					
+					<div class="module ajax-loading">
+						
+						<div class="copy">
+							<h2>ajax loading</h2>
+							<p>for smooth page transitions you need to be able to ajax load new pages. when changing page you also need to update and handle urls. verktyget comes with a ajax-loader and a url-manager.<p/>
+							<p>
+								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+							</p>
+						</div>
+						
+						<div class="scroll-detection">
+							<div class="box-1"></div>
+							<div class="box-2"></div>
+							<div class="box-3"></div>
+						</div>
+					</div>
+					
+					
+					
 				</div>
 			</div>
+			
+			<div id="footer">
+				
+				<p>
+					for more info check <a href="https://github.com/robinisaksson/verktyget" target="_blank">github</a> & <a href="https://www.npmjs.com/package/verktyget" target="_blank">npm</a>
+					<br/>
+					thanks for interest!
+				</p>
+	
+				<p class="tiny">
+					by using this site I agree to the cookie policy
+					<br/>
+					© 2018
+				</p>
+			</div>
+			
 		</div>
 
 	</body>

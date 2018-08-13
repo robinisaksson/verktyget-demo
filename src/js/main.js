@@ -6,8 +6,12 @@ import {EventDispatcher} from 'verktyget';
 
 
 // Project
-import GridModule from './modules/grid-module';
-import Hero from './modules/hero';
+import ImageLoaderModule from './modules/image-loader-module';
+import ResponsiveImageLoaderModule from './modules/responsive-image-loader-module';
+import VideoLoaderModule from './modules/video-loader-module';
+import VideoPlayerModule from './modules/video-player-module';
+import VideoHeroModule from './modules/video-hero-module';
+
 
 
 class Main {
@@ -29,17 +33,36 @@ class Main {
 		// NODES
 		this.contentNode = document.getElementById('content');
 		this.sceneNode = document.querySelector('.scene');
-
-		this.heroNode = document.querySelector('.hero');
-		this.hero = new Hero(this.heroNode);
 		
+		// Initialize modules
 		this.modules = [];
-		this.nodes = document.querySelectorAll('.grid-module');
-		var i, node;
-		for (i = 0;  node = this.nodes[i]; i++) {
-			var module = new GridModule(node, i);
-			this.modules.push(module);
-		}
+		
+		var imageModule = new ImageLoaderModule(); 
+		var responsiveImageModule = new ResponsiveImageLoaderModule(); 
+		var videoLoaderModule = new VideoLoaderModule();
+		var videoPlayerModule = new VideoPlayerModule();
+		var videoHeroModule = new VideoHeroModule();
+		
+		this.modules.push(imageModule);
+		this.modules.push(responsiveImageModule);
+		this.modules.push(videoLoaderModule);
+		this.modules.push(videoPlayerModule);
+		this.modules.push(videoHeroModule);
+		
+		
+		
+		
+		
+		// this.heroNode = document.querySelector('.hero');
+		// this.hero = new Hero(this.heroNode);
+		// 
+		
+		// this.nodes = document.querySelectorAll('.grid-module');
+		// var i, node;
+		// for (i = 0;  node = this.nodes[i]; i++) {
+		// 	var module = new GridModule(node, i);
+		// 	this.modules.push(module);
+		// }
 	}
 
 
@@ -57,11 +80,9 @@ class Main {
 	onResize(event) {
 		DeviceInfo.Resize();
 
-		this.hero.setSize();
-
 		var i = this.modules.length;
     while(i--) {
-      this.modules[i].setSize({bottom: -50});
+      this.modules[i].setSize();
     }
 	}
 

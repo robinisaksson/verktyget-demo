@@ -1,0 +1,49 @@
+.module.video-loader {
+	.media {
+		width: 68%;
+		margin-left: 16%;
+		video {
+			width: 100%;
+			height: auto;
+		}
+	}
+}
+
+
+.module.video-player {
+	.videos {
+		.media:first-child {
+			position: relative;
+			width: calc(100% / 12 * 7); // 7 columns wide (12 col grid)
+			z-index: 1; // on top of last-child
+			video {
+				width: 100%;
+				height: auto;
+			}
+		}
+		
+		.media:last-child {
+			position: relative;
+			width: calc(100% / 12 * 6); // 6 columns wide (12 col grid)
+			padding-top: (3/4 * 50%); // keep aspect ratio 4:3
+			height: 0; // padding-top instead
+			
+			margin-left: calc(100% / 12 * 5); // push 5 columns
+			overflow:hidden;
+			
+			video {
+				position: absolute;
+    		top: 0;
+				width: 100%;
+				height: auto;
+			}
+		}
+	}
+}
+.module.video-hero {
+	width: 100%;
+	.media {
+		width: 100%;
+		overflow:hidden;
+	}
+}

@@ -24,7 +24,6 @@ class Application {
       window.onload = this.CreateFallback.bind(this);
     }
     
-    
   
     // FONT LOADING
     // loading - This event is triggered when all fonts have been requested.
@@ -43,18 +42,18 @@ class Application {
       active: () => {
           this.OnAllFontsComplete();
       },
-      // // GOOGLE FONTS
-      // google: {
-      //   families: ['Roboto:400,500'],
-      // }
-      // FROM CSS
-      custom: {
-        // families: ['No5', 'Home Text', 'Barrio', 'Baloo', 'Amaranth', 'Aladin', 'Advent', 'Acme'],
-        families: ['Home Text'],
-        urls: ['../css/bundle.css'],
+      // GOOGLE FONTS
+      google: {
+        families: ['Roboto Mono:400,500'],
       }
+      // FROM CSS
+      // custom: {
+      //   families: ['No5', 'Home Text', 'Barrio', 'Baloo', 'Amaranth', 'Aladin', 'Advent', 'Acme'],
+      //   urls: ['../css/bundle.css'],
+      // }
     };
     WebFont.load(config);
+    
   }
   
   CreateFallback() {
