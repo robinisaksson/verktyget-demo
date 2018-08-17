@@ -2,8 +2,7 @@
 import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo} from 'verktyget';
-import NewImageLoader from '../utils/new-image-loader';
+import {DOM, DeviceInfo, ImageLoader} from 'verktyget';
 
 // import ScrollDetector from '../scroll-detector'; // in general module
 
@@ -25,7 +24,7 @@ class ImageLoaderModule { // extends generalModule
 		// 1. Create new loader
 		// 2. Listen for 'complete' event
 		// 3. Start loading with execute
-		this.imageLoader = new NewImageLoader(url);
+		this.imageLoader = new ImageLoader(url);
 		this.imageLoader.addEventListener('complete', this.onLoaded);
 		this.imageLoader.execute();
 		

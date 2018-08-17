@@ -3,12 +3,9 @@ import TweenLite from 'gsap';
 
 // UTILS
 import {DOM, DeviceInfo, Video} from 'verktyget';
-
-import NewVideo from '../utils/new-video';
-
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class VideoHeroModule { // extends generalModule
+class VideoViewportModule { // extends generalModule
 
 	constructor() {
 		
@@ -19,7 +16,7 @@ class VideoHeroModule { // extends generalModule
 		this.size = DeviceInfo.GetSize();
 		
 		// query DOM for relevant nodes
-		this.node = document.querySelector('.video-hero');
+		this.node = document.querySelector('.video-viewport');
 		this.mediaNode = this.node.querySelector('.media');
 		
 		// Urls
@@ -34,14 +31,14 @@ class VideoHeroModule { // extends generalModule
 			autoplay: true,
 			loop: true,
 			size: 'cover', // cover, contain
-			videoAspect: 1920/800,
+			videoAspect: 1280/720,
 			
 			// videoAspect: 16/9,
       // containerAspect: 16/9, //this.node.offsetWidth/this.node.offsetHeight, // this.size.x/this.size.y,
       // size: 'cover', // cover, contain
       // volume: 0,
 		}
-		this.video = new NewVideo(this.mediaNode, [urlDesktop], [1920], options); // from small size to larger sizes
+		this.video = new Video(this.mediaNode, [urlDesktop], [1920], options); // from small size to larger sizes
 		this.video.addEventListener('complete', this.onVideoLoaded);
 		this.video.execute(this.size.x); // screen width
 		
@@ -51,7 +48,7 @@ class VideoHeroModule { // extends generalModule
 	onVideoLoaded(event) {
 		
 		// Video is loaded
-		// console.log('video loaded: ', event.target.videoNode);
+		console.log('video loaded: ', event.target.videoNode);
 		// this.mediaNodeOne.appendChild(event.target.videoNode);
 	}
 	
@@ -75,4 +72,4 @@ class VideoHeroModule { // extends generalModule
 	}
 }
 
-export default VideoHeroModule;
+export default VideoViewportModule;

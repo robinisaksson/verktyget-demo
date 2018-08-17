@@ -10,8 +10,9 @@ import ImageLoaderModule from './modules/image-loader-module';
 import ResponsiveImageLoaderModule from './modules/responsive-image-loader-module';
 import VideoLoaderModule from './modules/video-loader-module';
 import VideoPlayerModule from './modules/video-player-module';
-import VideoHeroModule from './modules/video-hero-module';
+import VideoViewportModule from './modules/video-viewport-module';
 
+import ScrollDetection from './modules/scroll-detection';
 
 
 class Main {
@@ -41,13 +42,15 @@ class Main {
 		var responsiveImageModule = new ResponsiveImageLoaderModule(); 
 		var videoLoaderModule = new VideoLoaderModule();
 		var videoPlayerModule = new VideoPlayerModule();
-		var videoHeroModule = new VideoHeroModule();
+		var videoViewportModule = new VideoViewportModule();
+		var scrollDetection = new ScrollDetection();
 		
 		this.modules.push(imageModule);
 		this.modules.push(responsiveImageModule);
 		this.modules.push(videoLoaderModule);
 		this.modules.push(videoPlayerModule);
-		this.modules.push(videoHeroModule);
+		this.modules.push(videoViewportModule);
+		this.modules.push(scrollDetection);
 		
 		
 		

@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="js/bundle.js"></script>
 
 		<script>
-		// FPS METER - https://github.com/mrdoob/stats.js/
+		// FPS METER - https://https://github.com/mrdoob/stats.js/
 		// javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
 		</script>
 		
@@ -74,11 +74,12 @@
 							<h2>image loader</h2>
 							<p>knowing if & when assets are loaded are crucial to any frontend. below is a simple example of loading a image.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
 						<div class="media" data-image-url="assets/img/img-loader-highres.jpg">
+							<div class="description">Image loader</div>
 							<img src="assets/img/img-loader-thumbnail.jpg" alt="Image loader example" />
 						</div>
 					</div>
@@ -89,17 +90,19 @@
 						<div class="copy">
 							<p>when you have different assets depending on viewport size, then its nice to have a responsive image loader.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
 						
 						<div class="images">
 							<div class="media" data-root-url="assets/img/img-loader-2">
+								<div class="description margin">Responsive image (960, 1440, 1920)</div>
 								<img src="assets/img/img-loader-2-thumb.jpg" alt="Image loader example" />
 							</div>
 							
 							<div class="media" data-root-url="assets/img/img-loader-3">
+								<div class="description right">Responsive image (960, 1440, 1920)</div>
 								<img src="assets/img/img-loader-3-thumb.jpg" alt="Image loader example" />
 							</div>
 						</div>
@@ -112,11 +115,13 @@
 							<h2>video loader</h2>
 							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
-						<div class="media" data-video-url="assets/video/video-loader.mp4"></div>
+						<div class="media" data-video-url="assets/video/video-loader.mp4">
+							<div class="description">Video loader (default controls/player UI)</div>
+						</div>
 						
 					</div>
 					
@@ -126,34 +131,38 @@
 							<h2>video player</h2>
 							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
 						<div class="videos">
-							<div class="media" data-video-desktop="assets/video/video-1-desktop.mp4" data-video-mobile="assets/video/video-1-mobile.mp4"></div>
+							<div class="media" data-video-desktop="assets/video/video-1-desktop.mp4" data-video-mobile="assets/video/video-1-mobile.mp4">
+								<div class="description margin">Responsive video (autoplay, loop)</div>
+							</div>
 							<div class="media" data-video-desktop="assets/video/video-2-desktop.mp4" data-video-mobile="assets/video/video-2-mobile.mp4"></div>
 						</div>
 					</div>
 					
-					<div class="module video-hero">
-						<div class="media" data-video-desktop="assets/video/hero-1920.mp4" data-video-mobile="assets/video/hero-1366.mp4"></div>
+					<div class="module video-viewport">
+						<div class="media" data-video-desktop="assets/video/video-3-desktop.mp4">
+							<div class="description margin">Video (cover viewport size)</div>
+						</div>
 					</div>
 					
+					<!--
 					<div class="module video-player-ui">
 						
 						<div class="copy">
 							<p>get control over your selfhosted videos. often you want a background video that is autoplaying, then it's nice... it is using progressiveDownload and not streaming.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
 						<div class="media"  data-root-url="assets/video/video-3">
-							<!-- video 3 -->
 						</div>
 					</div>
-					
+					-->
 					
 					<div class="module scroll-detection">
 						
@@ -161,14 +170,31 @@
 							<h2>scroll detection</h2>
 							<p>after loading being able to detect the scroll position, check if user is above, ontop or below the content is extremely userful. lorem ipsum dolor set. lorem ipsum dolor set<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
-						<div class="scroll-demo">
-							<div class="box-1"></div>
-							<div class="box-2"></div>
-							<div class="box-3"></div>
+						<div class="demo">
+							<div class="box enter">
+								<div class="description">enter</div>
+							</div>
+							<div class="box leave">
+								<div class="description">leave</div>
+							</div>
+							
+							<div class="box enter-top">
+								<div class="description">enterTop</div>
+							</div>
+							<div class="box enter-bottom">
+								<div class="description">enterBottom</div>
+							</div>
+							
+							<div class="box leave-top">
+								<div class="description">leaveTop</div>
+							</div>
+							<div class="box leave-bottom">
+								<div class="description">leaveBottom</div>
+							</div>
 						</div>
 					</div>
 					
@@ -177,7 +203,7 @@
 						<div class="copy">
 							<p>when doing paralax scrolling or when you want animated a value based on the scroll position.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
@@ -195,7 +221,7 @@
 							<h2>ajax loading</h2>
 							<p>for smooth page transitions you need to be able to ajax load new pages. when changing page you also need to update and handle urls. verktyget comes with a ajax-loader and a url-manager.<p/>
 							<p>
-								<a href="github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
+								<a href="https://github.com/robinisaksson/verktyget" target="_blank">see this code on github.</a>
 							</p>
 						</div>
 						
@@ -214,7 +240,7 @@
 			<div id="footer">
 				
 				<p>
-					for more info check <a href="https://github.com/robinisaksson/verktyget" target="_blank">github</a> & <a href="https://www.npmjs.com/package/verktyget" target="_blank">npm</a>
+					for more info check <a href="https://https://github.com/robinisaksson/verktyget" target="_blank">github</a> & <a href="https://www.npmjs.com/package/verktyget" target="_blank">npm</a>
 					<br/>
 					thanks for interest!
 				</p>

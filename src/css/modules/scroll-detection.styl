@@ -1,0 +1,49 @@
+.module.scroll-detection {
+	.demo {
+		position: relative;
+		width: calc(100% - 80px);
+    max-width: 600px;
+		margin: 0 auto;
+		
+		border-top: 1px solid grey;
+		border-bottom: 1px solid grey;
+		
+		
+		.box {
+			width: 64px;
+			height: 64px;
+			&.active {
+				background-color: red;
+			}
+		}
+		.large-box {
+			width: 154px;
+			height: 154px;
+			&.active {
+				background-color: red;
+			}
+		}
+		
+		.enter {
+			background-color: #002230;
+		}
+		.leave {
+			background-color: #E5EFEF;
+		}
+			
+		.enter-top {
+			background-color: #023A51;
+		}
+		.enter-bottom {
+			background-color: #006167;
+		}
+		
+		.leave-top {
+			background-color: #023A51;
+		}
+		.leave-bottom {
+			background-color: #B2E1E9;
+		}
+		
+	}
+}

@@ -21,7 +21,6 @@ class VideoLoaderModule { // extends generalModule
 		this.staticVideoNode = this.node.querySelector('.media');
 		
 		var url = this.staticVideoNode.getAttribute('data-video-url');
-		console.log('url: ', url);
 		
 		// Video loader example
 		// 1. Create new loader
@@ -41,10 +40,8 @@ class VideoLoaderModule { // extends generalModule
 		this.staticVideo = event.target.videoNode;
 		// Add to DOM
 		this.staticVideoNode.appendChild(this.staticVideo);
-		// Loop
-		this.staticVideo.setAttribute('loop', 'true');
-		// Play video
-		this.staticVideo.play();
+		// Show controls
+		this.staticVideo.setAttribute('controls', 'true');
 	}
 	
 	onEnter() {

@@ -16,6 +16,8 @@
 	
 body {
 	background: #fff;
+	padding:0;
+	margin:0;
 }
 
 .scene {
@@ -44,6 +46,21 @@ body {
 			h1, h2 {
 				text-align: center;
 			  padding-bottom: 40px;
+			}
+		}
+		.media {
+			.description {
+				SetDescriptionFont();
+				padding-bottom: 4px;
+				width: 100%;
+				// border-top: 1px solid red;
+				
+				&.right {
+					text-align: right;
+				}
+				&.margin {
+					margin: 0 10px;
+				}
 			}
 		}
 	}

@@ -2,8 +2,7 @@
 import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo, Video} from 'verktyget';
-import NewImageLoader from '../utils/new-image-loader';
+import {DOM, DeviceInfo, Video, ImageLoader} from 'verktyget';
 
 // import ScrollDetector from '../scroll-detector'; // in general module
 
@@ -22,7 +21,7 @@ class ResponsiveImageLoaderModule { // extends generalModule
 			let root = media.getAttribute('data-root-url'); // get root url from DOM
 			let urls = [root+'-960.jpg', root+'-1440.jpg', root+'-1920.jpg']; // create array of image urls, add the different breakpoints
 			let sizes = [960, 1440, 1920]; // create array of with the size of each image
-			let imageLoader = new NewImageLoader(urls, sizes); // create new loader and pass urls & sizes
+			let imageLoader = new ImageLoader(urls, sizes); // create new loader and pass urls & sizes
 			imageLoader.addEventListener('complete', this.onImageLoaded); // Callback function when image is loaded
 			imageLoader.node = media; // remember DOM element, onImageLoaded needs to know which element to add the image
 			imageLoader.execute(); // TODO: Called when scrolled into view ...onScroll...

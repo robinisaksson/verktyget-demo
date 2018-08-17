@@ -4,8 +4,6 @@ import TweenLite from 'gsap';
 // UTILS
 import {DOM, DeviceInfo, Video} from 'verktyget';
 
-import NewVideo from '../utils/new-video';
-
 // import ScrollDetector from '../scroll-detector'; // in general module
 
 class VideoPlayerModule { // extends generalModule
@@ -32,18 +30,14 @@ class VideoPlayerModule { // extends generalModule
 		// 3. Start loading with execute
 		var options = {
 			autoplay: true,
-			loop: true,
-			// videoAspect: 16/9,
-      // containerAspect: 16/9, //this.node.offsetWidth/this.node.offsetHeight, // this.size.x/this.size.y,
-      // size: 'cover', // cover, contain
-      // volume: 0,
+			loop: true
 		}
-		this.video = new NewVideo(this.videoNodeOne, [urlMobile, urlDesktop], [404, 1280], options); // from small size to larger sizes
+		this.video = new Video(this.videoNodeOne, [urlMobile, urlDesktop], [404, 1280], options); // from small size to larger sizes
 		this.video.addEventListener('complete', this.onVideoLoaded);
 		this.video.execute(this.videoNodeOne.offsetWidth);
 		
 		
-		// ------------------------------------------------------------------------------------------
+		// Second video
 		var urlDesktop2 = this.videoNodeTwo.getAttribute('data-video-desktop');
 		var urlMobile2 = this.videoNodeTwo.getAttribute('data-video-mobile');
 		
@@ -51,11 +45,11 @@ class VideoPlayerModule { // extends generalModule
 			autoplay: true,
 			loop: true,
 			videoAspect: 16/9,
-      containerAspect: 4/3, //this.node.offsetWidth/this.node.offsetHeight, // this.size.x/this.size.y,
+      containerAspect: 4/3,
       size: 'cover', // cover, contain
       volume: 0,
 		}
-		this.video2 = new NewVideo(this.videoNodeTwo, [urlDesktop2], [1280], options2); // from small size to larger sizes
+		this.video2 = new Video(this.videoNodeTwo, [urlMobile2, urlDesktop2], [404, 1280], options2); // from small size to larger sizes
 		this.video2.addEventListener('complete', this.onVideoLoaded);
 		this.video2.execute(this.videoNodeTwo.offsetWidth);
 		
@@ -68,7 +62,7 @@ class VideoPlayerModule { // extends generalModule
 	onVideoLoaded(event) {
 		
 		// Video is loaded
-		// console.log('video loaded: ', event.target.videoNode);
+		console.log('video loaded: ', event.target.videoNode);
 		// this.videoNodeOne.appendChild(event.target.videoNode);
 	}
 	
@@ -79,8 +73,10 @@ class VideoPlayerModule { // extends generalModule
 	setScroll() {}
 	
 	setSize() {
-		var margin = this.videoNodeTwo.offsetHeight/2;
-		DOM.Style(this.videoNodeTwo, {marginTop: -margin+'px'});
+		var height = this.videoNodeTwo.offsetWidth * (3/4);
+		var margin = height/2;
+		DOM.Style(this.videoNodeTwo, {height: height+'px', marginTop: -margin+'px'});
+		
 		this.video.setSize();
 		this.video2.setSize();
 	}

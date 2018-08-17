@@ -1,6 +1,6 @@
-//
-import TweenMax from 'gsap';
-import TimelineMax from 'gsap/TimelineMax';
+// //
+// import TweenMax from 'gsap';
+// import TimelineMax from 'gsap/TimelineMax';
 
 import {EventDispatcher} from 'verktyget';
 import {DeviceInfo} from 'verktyget';
@@ -8,7 +8,7 @@ import {DOM} from 'verktyget';
 
 export class ScrollDetector extends EventDispatcher {
 
-	constructor(node, options, debug = false) {
+	constructor(options, debug = false) {
 		super();
 
 		// Events to listen for
@@ -19,10 +19,14 @@ export class ScrollDetector extends EventDispatcher {
 		// leaveTop
 		// leaveBottom
 
+		if (options.node === undefined) {
+			console.log('Node is required for Scroll Detection to work');
+			return;
+		}
+		
+		this.node = options.node;
+		console.log(this.node);
 		this.setSize = this.setSize.bind(this);
-
-		this.node = node;
-		this.debug = debug;
 		this.size = DeviceInfo.GetSize();
 		this.scroll = DeviceInfo.GetScroll();
 		this.isWithin = false;
@@ -35,12 +39,12 @@ export class ScrollDetector extends EventDispatcher {
 		// this.previousY = this.scroll.y; // Used for scroll direction
 		// this.scrollDirection; // up, down
 
-
+		
 
 		// Options are used to tell where detection should START & STOP
 		this.options = {
-			offsetTop: this.size.y*0.3,
-			offsetBottom: this.size.y*0.3, // this.size.y*0.5,
+			offsetStart: 0, // offset start position
+			offsetEnd: 0, // offset end position
 			triggerY: 0.5, // Can be a number between 0 and 1 defining the position of the trigger Y position in relation to the viewport height.
 		}
 		this.options = Object.assign(this.options, options); // Merge
@@ -49,6 +53,7 @@ export class ScrollDetector extends EventDispatcher {
 		// DEBUG - Draw visual lines for START & STOP
 		this.debug = debug;
 		if (this.debug) {
+			console.log('DEBUG');
 			if (document.getElementById('debug-center-line') === null) {
 				console.log('triggerY: ', this.options.triggerY);
 				this.debugCenterTop = DOM.Create('div', {'id':'debug-center-line'});
@@ -63,8 +68,8 @@ export class ScrollDetector extends EventDispatcher {
 			document.body.appendChild(this.debugLineTop);
 			document.body.appendChild(this.debugLineBottom);
 		}
+		
 		window.requestAnimationFrame(this.setSize);
-
 	}
 
 	getNode() {
@@ -132,17 +137,17 @@ export class ScrollDetector extends EventDispatcher {
 			//  this.tween.reverse();
 			// }
 
-			// go to a specific point in time
-			if (this.tween) {
-
-				// go smooth
-				this.tween.tweenTo(this.progress * this.tween.duration());
-
-				// just hard set it
-				// this.tween.progress(progress).pause();
-
-				// BUG When scrolling up from bottom, the animation start from wrong place
-			}
+			// // go to a specific point in time
+			// if (this.tween) {
+			// 
+			// 	// go smooth
+			// 	this.tween.tweenTo(this.progress * this.tween.duration());
+			// 
+			// 	// just hard set it
+			// 	// this.tween.progress(progress).pause();
+			// 
+			// 	// BUG When scrolling up from bottom, the animation start from wrong place
+			// }
 
 			/* ------------------------------------------------------------------------------------------ */
  			if (this.isWithin === true) return;
@@ -170,23 +175,23 @@ export class ScrollDetector extends EventDispatcher {
     // this.previousY = scrollY;
     // this.scrollDirection = direction;
 
-
+		// console.log('update');
 	}
 
-	// detector.setTween(TweenMax.to(this.h3), 1, {x: 400});
-	setTween(node, duration, params) {
-
-		var tween = TweenMax.to(node, duration, params);
-
-		this.tween = new TimelineMax({smoothChildTiming: true});
-		this.tween.add(tween);
-		this.tween.pause();
-
-		// // If no timeline
-		// var this.tween = tween;
-
-
-	}
+	// // detector.setTween(TweenMax.to(this.h3), 1, {x: 400});
+	// setTween(node, duration, params) {
+	// 
+	// 	var tween = TweenMax.to(node, duration, params);
+	// 
+	// 	this.tween = new TimelineMax({smoothChildTiming: true});
+	// 	this.tween.add(tween);
+	// 	this.tween.pause();
+	// 
+	// 	// // If no timeline
+	// 	// var this.tween = tween;
+	// 
+	// 
+	// }
 
 
 	// ScrollDetector dosent have a "resize" event. This is handeled by parent class
@@ -199,21 +204,24 @@ export class ScrollDetector extends EventDispatcher {
 		this.nodeTop = DOM.AbsoluteY(this.node);
 		this.nodeHeight = this.node.offsetHeight;
 		this.nodeBottom = this.nodeTop + this.nodeHeight;
-
+		
 		// Offset Top & Bottom - can be overwritten by parent
 		this.options = Object.assign(this.options, options); // Merge
 
 		// Position of START & STOP
 		var adjustTriggerY = this.options.triggerY*this.size.y;
 		this.position = {
-			top: this.nodeTop - this.options.offsetTop - adjustTriggerY, //+ adjustTriggerY,
-			bottom: this.nodeBottom + this.options.offsetBottom - adjustTriggerY
+			top: this.nodeTop - this.options.offsetStart - adjustTriggerY, //+ adjustTriggerY,
+			bottom: this.nodeBottom + this.options.offsetEnd - adjustTriggerY
 		}
 
 		// Draw debug lines
 		if (this.debug) {
+			console.log('UPDATE Debug');
 			DOM.Style(this.debugLineTop, {top:this.position.top + adjustTriggerY +'px'});
 			DOM.Style(this.debugLineBottom, {top: this.position.bottom + adjustTriggerY +'px'});
+			DOM.Style(this.debugCenterTop, {top: this.options.triggerY*this.size.y+'px'});
+
 		}
 		this.update();
 	}
