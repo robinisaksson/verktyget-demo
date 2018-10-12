@@ -66,7 +66,7 @@ class ScrollDetection extends EventDispatcher {
 		// ENTER
 		// Options are used to tell where detection should START & STOP
 		var options = {
-			debug: true,
+			debug: false,
 			// duration: 100,
 			// offsetStart: 0, // offset start position
 			// offsetEnd: 0, // offset start position
