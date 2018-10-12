@@ -1,0 +1,43 @@
+
+// +sm() {
+// 	background-color:blue;
+// }
+// +md() {
+// 	background-color:red;
+// }
+	
+
+// Colors
+// #002230
+// #023A51
+// #006167
+// #B2E1E9
+// #E5EFEF
+	
+#footer {
+	padding: 80px 0;
+	// border-bottom:1px solid red;
+	
+	.copy {
+		width: calc(100% - 80px);
+		max-width: 600px;
+		margin: 0 auto;
+		padding-bottom: 80px;
+		
+		+sm() {
+			width: calc(100% - 120px);
+		}
+		+md() {
+			width: calc(100% - 200px);
+		}
+		
+		h1, h2 {
+			text-align: center;
+			padding-bottom: 40px;
+		}
+		
+		.tiny {
+			margin-top: 100px;
+		}
+	}
+}
