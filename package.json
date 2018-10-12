@@ -24,24 +24,24 @@
   "dependencies": {
     "gsap": "^1.20.3",
     "scrollmagic": "^2.0.5",
-    "verktyget": "0.0.4",
+    "verktyget": "0.0.43",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.2",
     "autoprefixer-stylus": "^0.11.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-env": "^1.7.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
     "browserify-shim": "^3.8.14",
     "core-js": "^2.5.1",
     "cpx": "^1.5.0",
     "eslint": "^3.10.2",
-    "http-server": "^0.9.0",
+    "http-server": "^0.11.1",
     "livereload": "^0.6.0",
     "livereloadify-script": "^1.0.0",
     "stylus": "^0.54.5",
     "uglify-js": "^3.0.23",
-    "watchify": "^3.7.0"
+    "watchify": "^3.11.0"
   }
 }
