@@ -1,10 +1,5 @@
-// Vendor
-// import TweenLite from 'gsap';
-
-// UTILS
+// Verktyget
 import {EventDispatcher, DOM, DeviceInfo, Video, ImageLoader} from 'verktyget';
-
-// import ScrollDetector from '../scroll-detector'; // in general module
 
 class ResponsiveImageLoaderModule extends EventDispatcher {
 
