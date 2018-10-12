@@ -11,7 +11,7 @@ import ResponsiveImageLoaderModule from './modules/responsive-image-loader-modul
 import VideoLoaderModule from './modules/video-loader-module';
 import VideoPlayerModule from './modules/video-player-module';
 import VideoViewportModule from './modules/video-viewport-module';
-
+import AjaxLoaderModule from './modules/ajax-loader-module';
 import ScrollDetection from './modules/scroll-detection';
 
 
@@ -23,11 +23,12 @@ class Main {
 
 		this.onScroll = this.onScroll.bind(this);
 		this.onResize = this.onResize.bind(this);
-
+		this.onModuleLoaded = this.onModuleLoaded.bind(this);
+		
 		// SCROLL, RESIZE
 		window.addEventListener('scroll', this.onScroll);
 		window.addEventListener('resize', this.onResize);
-
+		
 		this.size = DeviceInfo.GetSize();
 		this.scroll = DeviceInfo.GetScroll();
 		
@@ -37,13 +38,37 @@ class Main {
 		
 		// Initialize modules
 		this.modules = [];
+		this.loadedModules = 0;
 		
-		var imageModule = new ImageLoaderModule(); 
-		var responsiveImageModule = new ResponsiveImageLoaderModule(); 
-		var videoLoaderModule = new VideoLoaderModule();
-		var videoPlayerModule = new VideoPlayerModule();
-		var videoViewportModule = new VideoViewportModule();
-		var scrollDetection = new ScrollDetection();
+		// Create page modules
+		var responsiveImageModule,
+		imageModule,
+		videoLoaderModule,
+		videoPlayerModule,
+		videoViewportModule,
+		scrollDetection,
+		ajaxLoading;
+		
+		imageModule = new ImageLoaderModule(); 
+		imageModule.addEventListener('loaded', this.onModuleLoaded);
+		
+		responsiveImageModule = new ResponsiveImageLoaderModule(); 
+		responsiveImageModule.addEventListener('loaded', this.onModuleLoaded);
+		
+		videoLoaderModule = new VideoLoaderModule();
+		videoLoaderModule.addEventListener('loaded', this.onModuleLoaded);
+		
+		videoPlayerModule = new VideoPlayerModule();
+		videoPlayerModule.addEventListener('loaded', this.onModuleLoaded);
+		
+		videoViewportModule = new VideoViewportModule();
+		videoViewportModule.addEventListener('loaded', this.onModuleLoaded);
+		
+		scrollDetection = new ScrollDetection();
+		scrollDetection.addEventListener('loaded', this.onModuleLoaded);
+		
+		ajaxLoading = new AjaxLoaderModule();
+		ajaxLoading.addEventListener('loaded', this.onModuleLoaded);
 		
 		this.modules.push(imageModule);
 		this.modules.push(responsiveImageModule);
@@ -51,14 +76,10 @@ class Main {
 		this.modules.push(videoPlayerModule);
 		this.modules.push(videoViewportModule);
 		this.modules.push(scrollDetection);
+		this.modules.push(ajaxLoading);
 		
 		
 		
-		
-		
-		// this.heroNode = document.querySelector('.hero');
-		// this.hero = new Hero(this.heroNode);
-		// 
 		
 		// this.nodes = document.querySelectorAll('.grid-module');
 		// var i, node;
@@ -68,7 +89,21 @@ class Main {
 		// }
 	}
 
-
+	onModuleLoaded(event) {
+		
+		// All loaded
+		if (this.loadedModules === this.modules.length-1) {
+			console.log('-------- ALL MODULES LOADED --------');
+			
+			var i = this.modules.length;
+	    while(i--) {
+	      this.modules[i].setSize();
+	    }
+		}
+		this.loadedModules++;
+	}
+	
+	
 	// SCROLL
 	onScroll(event) {
 		DeviceInfo.Scroll();
