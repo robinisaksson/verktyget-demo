@@ -21,15 +21,18 @@ class ScrollDetection extends EventDispatcher {
 		super();
 		
 		// Bind event
-		// this.onEnter = this.onEnter.bind(this);
-		// this.onLeave = this.onLeave.bind(this);
-		// this.onEnterTop = this.onEnterTop.bind(this);
-		// this.onEnterBottom = this.onEnterBottom.bind(this);
-		// this.onLeaveTop = this.onLeaveTop.bind(this);
-		// this.onLeaveBottom = this.onLeaveBottom.bind(this);
-		this.onAdd = this.onAdd.bind(this);
-		this.onRemove = this.onRemove.bind(this);
+		this.onEnter = this.onEnter.bind(this);
+		this.onLeave = this.onLeave.bind(this);
+		this.onEnterTop = this.onEnterTop.bind(this);
+		this.onEnterBottom = this.onEnterBottom.bind(this);
+		this.onLeaveTop = this.onLeaveTop.bind(this);
+		this.onLeaveBottom = this.onLeaveBottom.bind(this);
+		// this.onAdd = this.onAdd.bind(this);
+		// this.onRemove = this.onRemove.bind(this);
 		
+		this.onEnterScroll = this.onEnterScroll.bind(this);
+		this.onLeaveScroll = this.onLeaveScroll.bind(this);
+
 		this.onSMEnter = this.onSMEnter.bind(this);
 		this.onSMLeave = this.onSMLeave.bind(this);
 		
@@ -46,14 +49,12 @@ class ScrollDetection extends EventDispatcher {
 		this.node = document.querySelector('.scroll-detection');
 		this.demoNode = this.node.querySelector('.detection-demo');
 		
-		this.enterNode = this.demoNode.querySelector('.enter');
-		this.leaveNode = this.demoNode.querySelector('.leave');
+		this.middleLine = this.demoNode.querySelector('.middle-line');
+		this.boxLarge = this.demoNode.querySelector('.box-large');
+		this.boxSmall = this.demoNode.querySelector('.box-small');
 		
-		this.enterTopNode = this.demoNode.querySelector('.enter-top');
-		this.enterBottomNode = this.demoNode.querySelector('.enter-bottom');
-		
-		this.leaveTopNode = this.demoNode.querySelector('.leave-top');
-		this.leaveBottomNode = this.demoNode.querySelector('.leave-bottom');
+		this.descriptionLarge = this.boxLarge.querySelector('.description');
+		this.descriptionSmall = this.boxSmall.querySelector('.description');
 		
 		// enter
 		// leave
@@ -71,41 +72,50 @@ class ScrollDetection extends EventDispatcher {
 			// offsetEnd: 0, // offset start position
 			// triggerY: 0, // triggerY: 0.5, // Can be a number between 0 and 1 defining the position of the trigger Y position in relation to the viewport height.
 		}
-		var scrollEnter = new ScrollDetector(this.enterNode, options);
-		scrollEnter.addEventListener('enter', this.onAdd);
-		scrollEnter.addEventListener('leave', this.onRemove);
+
+
+		var scrollContainer = new ScrollDetector(this.demoNode, options);
+		scrollContainer.addEventListener('enter', this.onEnterScroll);
+		scrollContainer.addEventListener('leave', this.onLeaveScroll);
+
+		var scrollLarge = new ScrollDetector(this.boxLarge, options);
+		scrollLarge.addEventListener('enter', this.onEnter);
+		scrollLarge.addEventListener('leave', this.onLeave);
 		
-		// LEAVE
-		var scrollLeave = new ScrollDetector(this.leaveNode, {debug: true});
-		scrollLeave.addEventListener('leave', this.onAdd); // this.onLeave
-		scrollLeave.addEventListener('enter', this.onRemove);
+		var scrollSmall = new ScrollDetector(this.boxSmall, options);
+		scrollSmall.addEventListener('enterTop', this.onEnterTop);
+		scrollSmall.addEventListener('enterBottom', this.onEnterBottom);
+		scrollSmall.addEventListener('leaveTop', this.onLeaveTop);
+		scrollSmall.addEventListener('leaveBottom', this.onLeaveBottom);
 		
-		// Enter TOP
-		var scrollEnterTop = new ScrollDetector(this.enterTopNode, {debug: true});
-		scrollEnterTop.addEventListener('enterTop', this.onAdd); // this.onEnterTop)
-		scrollEnterTop.addEventListener('leaveTop', this.onRemove);
+		// // LEAVE
+		// var scrollLeave = new ScrollDetector(this.leaveNode, {debug: true});
+		// scrollLeave.addEventListener('leaveBottom', this.onAdd); // this.onLeave
+		// scrollLeave.addEventListener('enter', this.onRemove);
+		// 
+		// // Enter TOP
+		// var scrollEnterTop = new ScrollDetector(this.enterTopNode, {debug: true});
+		// scrollEnterTop.addEventListener('enterTop', this.onAdd); // this.onEnterTop)
+		// scrollEnterTop.addEventListener('leaveTop', this.onRemove);
+		// 
+		// // Enter BOTTOM
+		// var scrollEnterBottom = new ScrollDetector(this.enterBottomNode, {debug: true});
+		// scrollEnterBottom.addEventListener('enterBottom', this.onAdd); // this.onEnterBottom
+		// scrollEnterBottom.addEventListener('leaveBottom', this.onRemove);
+		// 
+		// // Leave TOP
+		// var scrollLeaveTop = new ScrollDetector(this.leaveTopNode, {debug: true});
+		// scrollLeaveTop.addEventListener('leaveTop', this.onAdd); // this.onLeaveTop
+		// scrollLeaveTop.addEventListener('leaveBottom', this.onRemove);
+		// 
+		// // Leave BOTTOM
+		// var scrollLeaveBottom = new ScrollDetector(this.leaveBottomNode, {debug: true});
+		// scrollLeaveBottom.addEventListener('leaveBottom', this.onAdd); // this.onLeaveBottom
+		// scrollLeaveBottom.addEventListener('leaveTop', this.onRemove);
 		
-		// Enter BOTTOM
-		var scrollEnterBottom = new ScrollDetector(this.enterBottomNode, {debug: true});
-		scrollEnterBottom.addEventListener('enterBottom', this.onAdd); // this.onEnterBottom
-		scrollEnterBottom.addEventListener('leaveBottom', this.onRemove);
-		
-		// Leave TOP
-		var scrollLeaveTop = new ScrollDetector(this.leaveTopNode, {debug: true});
-		scrollLeaveTop.addEventListener('leaveTop', this.onAdd); // this.onLeaveTop
-		scrollLeaveTop.addEventListener('leaveBottom', this.onRemove);
-		
-		// Leave BOTTOM
-		var scrollLeaveBottom = new ScrollDetector(this.leaveBottomNode, {debug: true});
-		scrollLeaveBottom.addEventListener('leaveBottom', this.onAdd); // this.onLeaveBottom
-		scrollLeaveBottom.addEventListener('leaveTop', this.onRemove);
-		
-		this.scollers.push(scrollEnter);
-		this.scollers.push(scrollLeave);
-		this.scollers.push(scrollEnterTop);
-		this.scollers.push(scrollEnterBottom);
-		this.scollers.push(scrollLeaveTop);
-		this.scollers.push(scrollLeaveBottom);
+		this.scollers.push(scrollContainer);
+		this.scollers.push(scrollLarge);
+		this.scollers.push(scrollSmall);
 		
 		this.setSize()
 		
@@ -134,13 +144,53 @@ class ScrollDetection extends EventDispatcher {
 		
 	}
 	
-	onAdd(event) {
-		DOM.AddClass(event.target.node, 'active');
+	// onAdd(event) {
+	// 	DOM.AddClass(event.target.node, 'active');
+	// }
+	// onRemove(event) {
+	// 	DOM.RemoveClass(event.target.node, 'active');
+	// }
+	
+	onEnterScroll(event) {
+		console.log('onEnterScroll');
+		DOM.AddClass(this.middleLine, 'active');
 	}
-	onRemove(event) {
-		DOM.RemoveClass(event.target.node, 'active');
+	onLeaveScroll(event) {
+		console.log('onLeaveScroll');
+		DOM.RemoveClass(this.middleLine, 'active');
+	}
+	onEnter(event) {
+		this.descriptionLarge.innerHTML = 'Enter';
+		DOM.AddClass(this.boxLarge, 'active');
+	}
+	onLeave(event) {
+		// DOM.RemoveClass(this.middleLine, 'active');
+		this.descriptionLarge.innerHTML = 'Leave';
+		DOM.RemoveClass(this.boxLarge, 'active');
 	}
 	
+	onEnterTop(event) {
+		this.descriptionSmall.innerHTML = 'EnterTop';
+		DOM.AddClass(this.boxSmall, 'active');
+	}
+	onEnterBottom(event) {
+		this.descriptionSmall.innerHTML = 'EnterBottom';
+		DOM.AddClass(this.boxSmall, 'active');
+	}
+	onLeaveTop(event) {
+		this.descriptionSmall.innerHTML = 'LeaveTop';
+		DOM.RemoveClass(this.boxSmall, 'active');
+	}
+	onLeaveBottom(event) {
+		this.descriptionSmall.innerHTML = 'LeaveBottom';
+		DOM.RemoveClass(this.boxSmall, 'active');
+	}
+	
+	
+
+
+
+
 	// onEnter(event) {
 	// 	console.log('scrolldetection: Enter');
 	// }
