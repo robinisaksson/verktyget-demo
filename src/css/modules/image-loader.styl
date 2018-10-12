@@ -8,27 +8,3 @@
 		}
 	}
 }
-
-
-.module.responsive-image-loader {
-	.images {
-		.media:first-child {
-			position: relative;
-			width: calc(100% / 12 * 7); // 7 columns wide (12 col grid)
-			z-index: 1; // on top of last-child
-			img {
-				width: 100%;
-				height: auto;
-			}
-		}
-		.media:last-child {
-			width: calc(100% / 12 * 6); // 6 columns wide (12 col grid)
-			margin-left: calc(100% / 12 * 5); // push 5 columns
-			transform: translate(0, -50%); // overlap 50% first-child
-			img {
-				width: 100%;
-				height: auto;
-			}
-		}
-	}
-}
