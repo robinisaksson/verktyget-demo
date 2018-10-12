@@ -1,15 +1,16 @@
 // Vendor
-import TweenLite from 'gsap';
+// import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo} from 'verktyget';
-import {VideoLoader} from 'verktyget';
-
+import {EventDispatcher, DOM, DeviceInfo, VideoLoader} from 'verktyget';
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class VideoLoaderModule { // extends generalModule
+
+class VideoLoaderModule extends EventDispatcher {
 
 	constructor() {
+		
+		super();
 		
 		// Bind event
 		this.onVideoLoaded = this.onVideoLoaded.bind(this);
@@ -42,6 +43,9 @@ class VideoLoaderModule { // extends generalModule
 		this.staticVideoNode.appendChild(this.staticVideo);
 		// Show controls
 		this.staticVideo.setAttribute('controls', 'true');
+		
+		
+		this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
 	}
 	
 	onEnter() {

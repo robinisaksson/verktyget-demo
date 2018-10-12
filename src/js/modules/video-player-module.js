@@ -1,14 +1,16 @@
 // Vendor
-import TweenLite from 'gsap';
+// import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo, Video} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
 
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class VideoPlayerModule { // extends generalModule
+class VideoPlayerModule extends EventDispatcher { // extends generalModule
 
 	constructor() {
+		
+		super();
 		
 		// Bind event
 		this.onVideoLoaded = this.onVideoLoaded.bind(this);
@@ -62,8 +64,10 @@ class VideoPlayerModule { // extends generalModule
 	onVideoLoaded(event) {
 		
 		// Video is loaded
-		console.log('video loaded: ', event.target.videoNode);
-		// this.videoNodeOne.appendChild(event.target.videoNode);
+		console.log('video loaded', event.target.videoNode.src);
+		
+		
+		this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
 	}
 	
 	onEnter() {}

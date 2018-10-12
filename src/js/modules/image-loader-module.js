@@ -1,14 +1,16 @@
 // Vendor
-import TweenLite from 'gsap';
+// import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo, ImageLoader} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, ImageLoader} from 'verktyget';
 
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class ImageLoaderModule { // extends generalModule
+class ImageLoaderModule extends EventDispatcher {
 
 	constructor() {
+		
+		super();
 		
 		// Bind event
 		this.onLoaded = this.onLoaded.bind(this);
@@ -36,6 +38,9 @@ class ImageLoaderModule { // extends generalModule
 		
 		// Image is loaded
 		this.imageNode.src = event.target.image.src;
+		
+		// Dispatch to main
+		this.dispatchEvent({type: 'loaded', target: this});
 	}
 	
 	onEnter() {

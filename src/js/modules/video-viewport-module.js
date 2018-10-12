@@ -2,12 +2,14 @@
 import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo, Video} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class VideoViewportModule { // extends generalModule
+class VideoViewportModule extends EventDispatcher { // extends generalModule
 
 	constructor() {
+		
+		super();
 		
 		// Bind event
 		this.onVideoLoaded = this.onVideoLoaded.bind(this);
@@ -42,14 +44,12 @@ class VideoViewportModule { // extends generalModule
 		this.video.addEventListener('complete', this.onVideoLoaded);
 		this.video.execute(this.size.x); // screen width
 		
-		this.setSize()
+		this.setSize();
 	}
 	
 	onVideoLoaded(event) {
-		
-		// Video is loaded
-		console.log('video loaded: ', event.target.videoNode);
-		// this.mediaNodeOne.appendChild(event.target.videoNode);
+		// Video is loaded!
+		this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
 	}
 	
 	onEnter() {}

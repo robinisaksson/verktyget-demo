@@ -1,19 +1,25 @@
 // Vendor
-import TweenLite from 'gsap';
+// import TweenLite from 'gsap';
 
 // UTILS
-import {DOM, DeviceInfo, Video, ImageLoader} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, Video, ImageLoader} from 'verktyget';
 
 // import ScrollDetector from '../scroll-detector'; // in general module
 
-class ResponsiveImageLoaderModule { // extends generalModule
+class ResponsiveImageLoaderModule extends EventDispatcher {
 
 	constructor() {
+		
+		super();
+		
+		this.onImageLoaded = this.onImageLoaded.bind(this);
+		
 		// console.log('Responsive image loader module');
 		this.node = document.querySelector('.module.responsive-image-loader');
 		
 		this.mediaNodes = Array.from(this.node.querySelectorAll('.media')); // nodeList to [array]
 		this.imageLoaders = [];
+		this.imagesLoaded = 0;
 		
 		var i, media;
 		for (i = 0; media = this.mediaNodes[i]; i++) {
@@ -34,11 +40,16 @@ class ResponsiveImageLoaderModule { // extends generalModule
 		let img = event.target.node.querySelector('img');
 		img.src = event.target.image.src;
 		// console.log('loaded: ', img, event.target.image.src);
+		
+		if (this.imagesLoaded === this.mediaNodes.length-1) {
+			this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
+		}
+		this.imagesLoaded++;
 	}
 	
 	setScroll() {}
+	
 	setSize() {
-		
 		var i, loader;
 		
 		for (i = 0; loader = this.imageLoaders[i]; i++) {
