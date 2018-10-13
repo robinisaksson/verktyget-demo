@@ -13,6 +13,8 @@ import VideoPlayerModule from './modules/video-player-module';
 import VideoViewportModule from './modules/video-viewport-module';
 import AjaxLoaderModule from './modules/ajax-loader-module';
 import ScrollDetection from './modules/scroll-detection';
+import ParallaxAnimationModule from './modules/parallax-animation-module';
+import ScrollAnimationModule from './modules/scroll-animation-module';
 
 
 class Main {
@@ -47,7 +49,13 @@ class Main {
 		videoPlayerModule,
 		videoViewportModule,
 		scrollDetection,
+		scrollAnimation,
+		parallaxAnimation,
 		ajaxLoading;
+		
+
+		// srcsetLoading = new SrcsetLoaderModule();
+		// srcsetLoading.addEventListener('loaded', this.onModuleLoaded);
 		
 		imageModule = new ImageLoaderModule(); 
 		imageModule.addEventListener('loaded', this.onModuleLoaded);
@@ -67,6 +75,12 @@ class Main {
 		scrollDetection = new ScrollDetection();
 		scrollDetection.addEventListener('loaded', this.onModuleLoaded);
 		
+		scrollAnimation = new ScrollAnimationModule();
+		scrollAnimation.addEventListener('loaded', this.onModuleLoaded);
+		
+		parallaxAnimation = new ParallaxAnimationModule();
+		parallaxAnimation.addEventListener('loaded', this.onModuleLoaded);
+		
 		ajaxLoading = new AjaxLoaderModule();
 		ajaxLoading.addEventListener('loaded', this.onModuleLoaded);
 		
@@ -76,6 +90,8 @@ class Main {
 		this.modules.push(videoPlayerModule);
 		this.modules.push(videoViewportModule);
 		this.modules.push(scrollDetection);
+		this.modules.push(scrollAnimation);
+		this.modules.push(parallaxAnimation);
 		this.modules.push(ajaxLoading);
 		
 		

@@ -1,11 +1,10 @@
-// Vendor
-// import TweenLite from 'gsap';
-
-// UTILS
+// Verktyget
 import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
 
-// Dev for new scroll-detection
 import ScrollDetector from '../utils/scroll-detector';
+
+// Dev for new scroll-detection
+// import ScrollDetector from '../utils/scroll-detector';
 
 // Compare with Scrollmagic
 // import ScrollMagic from 'scrollmagic';
@@ -27,16 +26,10 @@ class ScrollDetection extends EventDispatcher {
 		this.onEnterBottom = this.onEnterBottom.bind(this);
 		this.onLeaveTop = this.onLeaveTop.bind(this);
 		this.onLeaveBottom = this.onLeaveBottom.bind(this);
-		// this.onAdd = this.onAdd.bind(this);
-		// this.onRemove = this.onRemove.bind(this);
-		
 		this.onEnterScroll = this.onEnterScroll.bind(this);
 		this.onLeaveScroll = this.onLeaveScroll.bind(this);
-
-		this.onSMEnter = this.onSMEnter.bind(this);
-		this.onSMLeave = this.onSMLeave.bind(this);
-		
-		
+		// this.onSMEnter = this.onSMEnter.bind(this);
+		// this.onSMLeave = this.onSMLeave.bind(this);
 		
 		// Screen size
 		this.size = DeviceInfo.GetSize();
@@ -88,31 +81,6 @@ class ScrollDetection extends EventDispatcher {
 		scrollSmall.addEventListener('leaveTop', this.onLeaveTop);
 		scrollSmall.addEventListener('leaveBottom', this.onLeaveBottom);
 		
-		// // LEAVE
-		// var scrollLeave = new ScrollDetector(this.leaveNode, {debug: true});
-		// scrollLeave.addEventListener('leaveBottom', this.onAdd); // this.onLeave
-		// scrollLeave.addEventListener('enter', this.onRemove);
-		// 
-		// // Enter TOP
-		// var scrollEnterTop = new ScrollDetector(this.enterTopNode, {debug: true});
-		// scrollEnterTop.addEventListener('enterTop', this.onAdd); // this.onEnterTop)
-		// scrollEnterTop.addEventListener('leaveTop', this.onRemove);
-		// 
-		// // Enter BOTTOM
-		// var scrollEnterBottom = new ScrollDetector(this.enterBottomNode, {debug: true});
-		// scrollEnterBottom.addEventListener('enterBottom', this.onAdd); // this.onEnterBottom
-		// scrollEnterBottom.addEventListener('leaveBottom', this.onRemove);
-		// 
-		// // Leave TOP
-		// var scrollLeaveTop = new ScrollDetector(this.leaveTopNode, {debug: true});
-		// scrollLeaveTop.addEventListener('leaveTop', this.onAdd); // this.onLeaveTop
-		// scrollLeaveTop.addEventListener('leaveBottom', this.onRemove);
-		// 
-		// // Leave BOTTOM
-		// var scrollLeaveBottom = new ScrollDetector(this.leaveBottomNode, {debug: true});
-		// scrollLeaveBottom.addEventListener('leaveBottom', this.onAdd); // this.onLeaveBottom
-		// scrollLeaveBottom.addEventListener('leaveTop', this.onRemove);
-		
 		this.scollers.push(scrollContainer);
 		this.scollers.push(scrollLarge);
 		this.scollers.push(scrollSmall);
@@ -144,19 +112,14 @@ class ScrollDetection extends EventDispatcher {
 		
 	}
 	
-	// onAdd(event) {
-	// 	DOM.AddClass(event.target.node, 'active');
-	// }
-	// onRemove(event) {
-	// 	DOM.RemoveClass(event.target.node, 'active');
-	// }
+	
 	
 	onEnterScroll(event) {
-		console.log('onEnterScroll');
+		// console.log('onEnterScroll');
 		DOM.AddClass(this.middleLine, 'active');
 	}
 	onLeaveScroll(event) {
-		console.log('onLeaveScroll');
+		// console.log('onLeaveScroll');
 		DOM.RemoveClass(this.middleLine, 'active');
 	}
 	onEnter(event) {
@@ -187,44 +150,18 @@ class ScrollDetection extends EventDispatcher {
 	}
 	
 	
-
-
-
-
-	// onEnter(event) {
-	// 	console.log('scrolldetection: Enter');
-	// }
-	// 
-	// onLeave(event) {
-	// 	console.log('scrolldetection: Leave');
-	// }
-	// 
-	// onEnterTop(event) {
-	// 	console.log('scrolldetection: onEnterTop');
-	// }
-	// onEnterBottom(event) {
-	// 	console.log('scrolldetection: onEnterBottom');
-	// }
-	// 
-	// onLeaveTop(event) {
-	// 	console.log('scrolldetection: onLeaveTop');
-	// }
-	// onLeaveBottom(event) {
-	// 	console.log('scrolldetection: onLeaveBottom');
-	// }
-	
 	// ------------------------------------------------------------------
-	onSMEnter(event) {
-		console.log('enter scrollmagic');
-		// event.type, 
-		// event.target, 
-		// event.progress, 
-		// event.state, 
-		// event.scrollDirection
-	}
-	onSMLeave(event) {
-		console.log('leave scrollmagic');
-	}
+	// onSMEnter(event) {
+	// 	console.log('enter scrollmagic');
+	// 	// event.type, 
+	// 	// event.target, 
+	// 	// event.progress, 
+	// 	// event.state, 
+	// 	// event.scrollDirection
+	// }
+	// onSMLeave(event) {
+	// 	console.log('leave scrollmagic');
+	// }
 	// ------------------------------------------------------------------
 	
 	setScroll() {
@@ -241,7 +178,6 @@ class ScrollDetection extends EventDispatcher {
 	
 	
 	setSize() {
-		console.log('update size');
 		this.size = DeviceInfo.GetSize();
 		
 		//var options = {}
