@@ -41,54 +41,21 @@
 			background-color: #E5EFEF;
 		}
 		
-		// 
-		// 
-		// .box {
-		// 	width: 64px;
-		// 	height: 64px;
-		// }
-		// 
-		// .large-box {
-		// 	width: 154px;
-		// 	height: 154px;
-		// }
-		// 
-		// .enter {
-		// 	top: calc(50% - 154px);
-		// 	left: calc(50%);
-		// 	background-color: #002230;
-		// 	color: #fff;
-		// }
-		// .leave {
-		// 	top: calc(50%);
-		// 	left: calc(50% - 154px);
-		// 	background-color: #E5EFEF;
-		// }
-		// 
-		// .enter-top {
-		// 	top:0;
-		// 	left:0;
-		// 	background-color: #023A51;
-		// 	color: #fff;
-		// }
-		// .enter-bottom {
-		// 	top:0;
-		// 	right:0;
-		// 	background-color: #006167;
-		// 	color: #fff;
-		// }
-		// 
-		// .leave-top {
-		// 	bottom:0;
-		// 	left:0;
-		// 	background-color: #023A51;
-		// 	color: #fff;
-		// }
-		// .leave-bottom {
-		// 	bottom:0;
-		// 	right:0;
-		// 	background-color: #B2E1E9;
-		// }
+		.middle-line {
+			position: fixed;
+			top: 50vh;
+			height: 0;
+			left:0;
+			width:100%;
+			
+			border-top: 1px dashed #D8D8D8;
+			transition: opacity 400ms;
+			opacity: 0;
+			
+			&.active {
+				opacity: 1;
+			}
+		}
 		
 	}
 }
