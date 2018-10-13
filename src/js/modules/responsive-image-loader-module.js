@@ -1,5 +1,5 @@
 // Verktyget
-import {EventDispatcher, DOM, DeviceInfo, Video, ImageLoader} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, ImageLoader} from 'verktyget';
 
 class ResponsiveImageLoaderModule extends EventDispatcher {
 
