@@ -1,14 +1,12 @@
-// //
-// import TweenMax from 'gsap';
-// import TimelineMax from 'gsap/TimelineMax';
 
 import {EventDispatcher} from 'verktyget';
 import {DeviceInfo} from 'verktyget';
 import {DOM} from 'verktyget';
+import {Lerp} from 'verktyget';
 
 export class ScrollDetector extends EventDispatcher {
 
-	constructor(options, debug = false) {
+	constructor(node, options) {
 		super();
 
 		// Events to listen for
@@ -18,17 +16,22 @@ export class ScrollDetector extends EventDispatcher {
 		// enterBottom
 		// leaveTop
 		// leaveBottom
-
-		if (options.node === undefined) {
+		
+		if (node === undefined) {
 			console.log('Node is required for Scroll Detection to work');
 			return;
 		}
 		
-		this.node = options.node;
-		console.log(this.node);
+		// Bind events
+		this.runUpdate = this.runUpdate.bind(this);
+		this.runSetSize = this.runSetSize.bind(this);
+		
+		// Var
 		this.setSize = this.setSize.bind(this);
+		// this.refresh = this.refresh.bind(this);
 		this.size = DeviceInfo.GetSize();
 		this.scroll = DeviceInfo.GetScroll();
+		this.node = node;
 		this.isWithin = false;
 		this.fromBottom = false;
 		this.fromTop = false;
@@ -43,50 +46,70 @@ export class ScrollDetector extends EventDispatcher {
 
 		// Options are used to tell where detection should START & STOP
 		this.options = {
+			useAnimation: false,
 			offsetStart: 0, // offset start position
 			offsetEnd: 0, // offset end position
 			triggerY: 0.5, // Can be a number between 0 and 1 defining the position of the trigger Y position in relation to the viewport height.
+			debug: false,
+			
+			// Extend?
+			// refreshInterval: 100
 		}
 		this.options = Object.assign(this.options, options); // Merge
-		// console.log(this.options);
+
 
 		// DEBUG - Draw visual lines for START & STOP
-		this.debug = debug;
+		// ------------------------------------------------------------------------------------------------------------
+		this.debug = this.options.debug;
 		if (this.debug) {
-			console.log('DEBUG');
-			if (document.getElementById('debug-center-line') === null) {
-				console.log('triggerY: ', this.options.triggerY);
-				this.debugCenterTop = DOM.Create('div', {'id':'debug-center-line'});
-				DOM.Style(this.debugCenterTop, {top: this.options.triggerY*this.size.y+'px', width:'30px', height: '2px', right: '0px', position: 'fixed', backgroundColor:'red'});
-				document.body.appendChild(this.debugCenterTop);
-			}
-
 			this.debugLineTop = DOM.Create('div');
 			this.debugLineBottom = DOM.Create('div');
+			this.debugCenterTop = DOM.Create('div');
 			DOM.Style(this.debugLineTop, {top:0, width:'20px', height: '1px', right: '0px', position: 'absolute', backgroundColor:'green'});
 			DOM.Style(this.debugLineBottom, {top:0, width:'20px', height: '1px', right: '0px', position: 'absolute', backgroundColor:'blue'});
+			DOM.Style(this.debugCenterTop, {top: this.options.triggerY*this.size.y+'px', width: '30px', height: '2px', right: '0px', position: 'fixed', backgroundColor:'red'});
+			
 			document.body.appendChild(this.debugLineTop);
 			document.body.appendChild(this.debugLineBottom);
+			document.body.appendChild(this.debugCenterTop);
 		}
+		// ------------------------------------------------------------------------------------------------------------
 		
-		window.requestAnimationFrame(this.setSize);
+		// this.scheduleRefresh();
+		// window.requestAnimationFrame(this.setSize);
+		this.setSize();
 	}
 
 	getNode() {
 		return this.node;
 	}
-
+	
+	getProgress() {
+		return this.progress;
+	}
+	
+	getDuration() {
+		return this.position.bottom - this.position.top;
+	}
+	
+	
   update() {
+		window.requestAnimationFrame(this.runUpdate); // Delay update 1 frame
+	}
+	
+	runUpdate() {
 		if (this.position === undefined) {
 			console.log('issue?  ', this.position);
 			return;
 		}
-
+		
+		
 		// Scroll position
 		this.scroll = DeviceInfo.GetScroll();
 		var adjustTriggerY = this.options.triggerY*this.size.y;
 		let scrollY = this.scroll.y; // + adjustTriggerY;
-
+		
+		
 		// // Check direction
 		// let direction = scrollY > this.previousY ? 'down' : 'up';
     // if (this.scrollDirection && direction !== this.scrollDirection) {
@@ -102,6 +125,11 @@ export class ScrollDetector extends EventDispatcher {
 			if (this.isWithin === true) {
 				this.fromBottom = true;
 				this.fromTop = false;
+				
+				if (this.options.useAnimation === true) {
+					this.progress = 1;
+					this.dispatchEvent({type:'progress', target:this});
+				}
 				this.dispatchEvent({type:'leave', target:this});
 				this.dispatchEvent({type:'leaveBottom', target:this});
 				// if (this.debug) {console.log('LEAVE from bottom')}
@@ -114,6 +142,11 @@ export class ScrollDetector extends EventDispatcher {
 			if (this.isWithin === true) {
 				this.fromBottom = false;
 				this.fromTop = true;
+				
+				if (this.options.useAnimation === true) {
+					this.progress = 0;
+					this.dispatchEvent({type:'progress', target:this});
+				}
 				this.dispatchEvent({type:'leave', target:this});
 				this.dispatchEvent({type:'leaveTop', target:this});
 				// if (this.debug) {console.log('LEAVE from top')}
@@ -124,32 +157,15 @@ export class ScrollDetector extends EventDispatcher {
 		// INSIDE
 		else {
 
-			// TODO ANIMATION
+			// USE ANIMATION
 			/* ------------------------------------------------------------------------------------------ */
-			// investigate how to use requestAnimationFrame
-			// this.dispatchEvent({type:'progressWithin', target:this});
-			this.dispatchEvent({type:'progress', target:this});
-
-			// Play
-			// if (progress > 0) { // play from 0 to 1
-			// 	this.tween.play();
-			// } else { // play from 1 to 0
-			//  this.tween.reverse();
-			// }
-
-			// // go to a specific point in time
-			// if (this.tween) {
-			// 
-			// 	// go smooth
-			// 	this.tween.tweenTo(this.progress * this.tween.duration());
-			// 
-			// 	// just hard set it
-			// 	// this.tween.progress(progress).pause();
-			// 
-			// 	// BUG When scrolling up from bottom, the animation start from wrong place
-			// }
-
+			if (this.options.useAnimation === true) {
+				this.progressTarget = this.progress;
+		    this.onProgressRAF(); // Run requestAnimationFrame
+			}
 			/* ------------------------------------------------------------------------------------------ */
+			
+				
  			if (this.isWithin === true) return;
 
 			// BOTTOM
@@ -178,55 +194,112 @@ export class ScrollDetector extends EventDispatcher {
 		// console.log('update');
 	}
 
-	// // detector.setTween(TweenMax.to(this.h3), 1, {x: 400});
-	// setTween(node, duration, params) {
-	// 
-	// 	var tween = TweenMax.to(node, duration, params);
-	// 
-	// 	this.tween = new TimelineMax({smoothChildTiming: true});
-	// 	this.tween.add(tween);
-	// 	this.tween.pause();
-	// 
-	// 	// // If no timeline
-	// 	// var this.tween = tween;
-	// 
-	// 
+	// get element position (optionally relative to viewport)
+	getNodePosition(node, relativeToViewport = true) {
+		var pos = {
+			top: 0,
+			left: 0,
+			width: 0,
+			height: 0
+		};
+
+		var rect = node.getBoundingClientRect();
+		pos.top = rect.top;
+		pos.left = rect.left;
+		pos.height = rect.height;
+		pos.width = rect.width;
+		
+		if (relativeToViewport === true) { 
+			pos.top += this.scroll.y;
+			pos.left += this.scroll.x;
+		}
+
+		return pos;
+	};
+	
+
+	onProgressRAF() {
+
+		const dif = (this.progressTarget - this.progress);
+		if (Math.abs(dif) > 0.001) {
+			this.progress = Lerp(this.progress, this.progressTarget, 0.01);
+			this.raf = window.requestAnimationFrame(this.onProgressRAF);
+		} else {
+			this.progress = this.progressTarget;
+			window.cancelAnimationFrame(this.raf);
+		}
+
+		// Update tween!
+		// console.log('progress: ', this.progress);
+		this.dispatchEvent({type:'progress', target:this});
+	}
+	
+	
+	
+	
+	// // TODO - Use a interval to reset values, until they are the same of X amount of iterations.
+	// refresh() {
+	// 	console.log('run refresh!');
+	// 	this.setSize();
 	// }
+	// 
+	// scheduleRefresh() {
+	// 	console.log(this.options.refreshInterval);
+	// 	if (this.options.refreshInterval > 0) {
+	// 		this.refreshTimeout = window.setTimeout(this.refresh, this.options.refreshInterval);
+	// 	}
+	// };
 
 
-	// ScrollDetector dosent have a "resize" event. This is handeled by parent class
+
+	// ScrollDetector dosent have a "resize" event. You need to call setSize in your project code
 	setSize(options) {
+		
+		// Offset Top & Bottom - can be overwritten by parent
+		if (options) {
+			this.options = Object.assign(this.options, options); // Merge
+		}
+		
+		var runSetSize = this.runSetSize;
+		window.setTimeout(function() { runSetSize(); }, 100);
+		// window.requestAnimationFrame(this.runSetSize); // Delay setSize 1 frame - not enough!
+	}
+	
+	runSetSize() {
 		this.size = DeviceInfo.GetSize();
 
-
-
 		// Node position
+		// OLD way of messeure node position
 		this.nodeTop = DOM.AbsoluteY(this.node);
 		this.nodeHeight = this.node.offsetHeight;
 		this.nodeBottom = this.nodeTop + this.nodeHeight;
-		
-		// Offset Top & Bottom - can be overwritten by parent
-		this.options = Object.assign(this.options, options); // Merge
 
-		// Position of START & STOP
+		// var pos = this.getNodePosition(this.node)
+		// this.nodeTop = pos.top;
+		// this.nodeHeight = pos.height;
+		// this.nodeBottom = pos.top + pos.height;
+		
+
+		// // Position of START & STOP
 		var adjustTriggerY = this.options.triggerY*this.size.y;
 		this.position = {
-			top: this.nodeTop - this.options.offsetStart - adjustTriggerY, //+ adjustTriggerY,
+			top: this.nodeTop - this.options.offsetStart - adjustTriggerY,
 			bottom: this.nodeBottom + this.options.offsetEnd - adjustTriggerY
 		}
-
+		
 		// Draw debug lines
-		if (this.debug) {
-			console.log('UPDATE Debug');
+		if (this.debug === true) {
 			DOM.Style(this.debugLineTop, {top:this.position.top + adjustTriggerY +'px'});
 			DOM.Style(this.debugLineBottom, {top: this.position.bottom + adjustTriggerY +'px'});
 			DOM.Style(this.debugCenterTop, {top: this.options.triggerY*this.size.y+'px'});
-
 		}
+		
 		this.update();
 	}
 
-	destroy() {}
+	destroy() {
+		// window.clearTimeout(this.refreshTimeout);
+	}
 
 }
 
