@@ -20,12 +20,12 @@ class ResponsiveImageLoaderModule extends EventDispatcher {
 		for (i = 0; media = this.mediaNodes[i]; i++) {
 			
 			let root = media.getAttribute('data-root-url'); // get root url from DOM
-			let urls = [root+'-960.jpg', root+'-1440.jpg', root+'-1920.jpg']; // create array of image urls, add the different breakpoints
-			let sizes = [960, 1440, 1920]; // create array of with the size of each image
+			let urls = [root+'-960.jpg', root+'-1440.jpg', root+'-1920.jpg']; // create array of image urls, small to large, add the different breakpoints
+			let sizes = [960, 1440, 1920]; // create array, small to large, with the width of each image
 			let imageLoader = new ImageLoader(urls, sizes); // create new loader and pass urls & sizes
 			imageLoader.addEventListener('complete', this.onImageLoaded); // Callback function when image is loaded
 			imageLoader.node = media; // remember DOM element, onImageLoaded needs to know which element to add the image
-			imageLoader.execute(); // TODO: Called when scrolled into view ...onScroll...
+			imageLoader.execute(); // Load images
 			
 			this.imageLoaders.push(imageLoader); // Remember loader, so we can update onResize
 		}

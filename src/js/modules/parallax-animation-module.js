@@ -12,8 +12,6 @@ class ParallaxAnimationModule extends EventDispatcher {
 		super();
 		
 		this.onImageLoaded = this.onImageLoaded.bind(this);
-		this.onEnter = this.onEnter.bind(this);
-		this.onLeave = this.onLeave.bind(this);
 		this.onProgress = this.onProgress.bind(this);
 		
 		this.size = DeviceInfo.GetSize();
@@ -27,18 +25,17 @@ class ParallaxAnimationModule extends EventDispatcher {
 		for (i = 0; media = this.mediaNodes[i]; i++) {
 			
 			let root = media.getAttribute('data-root-url'); // get root url from DOM
-			let urls = [root+'-960.jpg', root+'-1440.jpg', root+'-1920.jpg']; // create array of image urls, add the different breakpoints
-			let sizes = [960, 1440, 1920]; // create array of with the size of each image
+			let urls = [root+'-960.jpg', root+'-1440.jpg', root+'-1920.jpg']; // create array of image urls, small to large, add the different breakpoints
+			let sizes = [960, 1440, 1920]; // create array, small to large, with the width of each image
 			let imageLoader = new ImageLoader(urls, sizes); // create new loader and pass urls & sizes
 			imageLoader.addEventListener('complete', this.onImageLoaded); // Callback function when image is loaded
 			imageLoader.node = media; // remember DOM element, onImageLoaded needs to know which element to add the image
-			imageLoader.execute(); // TODO: Called when scrolled into view ...onScroll...
+			imageLoader.execute(); // Load images
 			
 			this.imageLoaders.push(imageLoader); // Remember loader, so we can update onResize
 		}
 		
-		// Add scroll to first mediaNode
-		// ------------------------------------------------------------------------------------------
+		
 		// Add scroll animation ---------------------------------------------------------------------
 		var node = this.mediaNodes[0];
 		var options = {
@@ -49,9 +46,7 @@ class ParallaxAnimationModule extends EventDispatcher {
 			// triggerY: 0.5, // triggerY: 0.5, // Can be a number between 0 and 1 defining the position of the trigger Y position in relation to the viewport height.
 		};
 		this.scrollAnimation = new ScrollDetector(node, options);
-		this.scrollAnimation.addEventListener('enter', this.onEnter);
-		this.scrollAnimation.addEventListener('leave', this.onLeave);
-		this.scrollAnimation.addEventListener('progress', this.onProgress);
+		this.scrollAnimation.addEventListener('progress', this.onProgress); // useAnimation needs to be true for progress events to be dispatched
 		
 		// Set initial position + tween
 		TweenLite.set(node, {y: -this.size.y*0.15});
@@ -72,12 +67,6 @@ class ParallaxAnimationModule extends EventDispatcher {
 		this.imagesLoaded++;
 	}
 	
-	onEnter(event) {
-		console.log('Enter');
-	}
-	onLeave(event) {
-		console.log('Leave');
-	}
 	
 	onProgress(event) {
 		// console.log('Progress Animation ', event.target.progress);
@@ -92,22 +81,25 @@ class ParallaxAnimationModule extends EventDispatcher {
 	setSize() {
 		this.size = DeviceInfo.GetSize();
 		
+		// Update responsive image loader
 		var i, loader;
-		
 		for (i = 0; loader = this.imageLoaders[i]; i++) {
 			let width = this.mediaNodes[i].offsetWidth;
 			loader.updateSize(width);
 		}
 		
+		
+		// Set mediaNode start position + update tween
+		TweenLite.set(this.mediaNodes[0], {y: -this.size.y*0.15});
+		this.scrollTween = TweenLite.to(this.mediaNodes[0], 1, {y: this.size.y*0.15, paused:true, ease: Power0.easeNone});
+		
+		
+		// Update scroll detection bounds
 		var options = {
 			offsetStart: this.size.y*0.65, // offset start position
 			offsetEnd: this.size.y*0.65, // offset start position
 		}
 		this.scrollAnimation.setSize(options);
-		
-		// Set position + update tween
-		TweenLite.set(this.mediaNodes[0], {y: -this.size.y*0.15});
-		this.scrollTween = TweenLite.to(this.mediaNodes[0], 1, {y: this.size.y*0.15, paused:true, ease: Power0.easeNone});
 		
 	}
 }

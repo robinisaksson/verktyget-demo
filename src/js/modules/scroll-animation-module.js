@@ -26,9 +26,8 @@ class ScrollAnimationModule extends EventDispatcher {
 		this.box3 = this.animationContainer.querySelector('.box-3');
 		this.box4 = this.animationContainer.querySelector('.box-4');
 		this.box5 = this.animationContainer.querySelector('.box-5');
-		console.log('middleLine: ', this.middleLine);
 		
-		// ------------------------------------------------------------------------------------------
+
 		// Add scroll animation ---------------------------------------------------------------------
 		var options = {
 			debug: false,
@@ -40,7 +39,7 @@ class ScrollAnimationModule extends EventDispatcher {
 		this.scrollAnimation = new ScrollDetector(this.animationContainer, options);
 		this.scrollAnimation.addEventListener('enter', this.onEnter);
 		this.scrollAnimation.addEventListener('leave', this.onLeave);
-		this.scrollAnimation.addEventListener('progress', this.onProgress);
+		this.scrollAnimation.addEventListener('progress', this.onProgress); // useAnimation needs to be true for progress events to be dispatched
 		
 		// Create Tweens
 		this.scroll1 = TweenLite.to(this.box1, 1, {height: this.size.y*0.6+'px', paused:true, ease: Power0.easeNone});
