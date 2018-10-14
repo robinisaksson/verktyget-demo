@@ -2,9 +2,8 @@
 import TweenLite from 'gsap';
 
 // Verktyget
-import {EventDispatcher, DOM, DeviceInfo, ImageLoader} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, ImageLoader, ScrollDetector} from 'verktyget';
 
-import ScrollDetector from '../utils/scroll-detector';
 
 class ParallaxAnimationModule extends EventDispatcher {
 

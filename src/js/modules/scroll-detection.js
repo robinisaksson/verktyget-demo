@@ -1,7 +1,7 @@
 // Verktyget
-import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
+import {EventDispatcher, DOM, DeviceInfo, ScrollDetector} from 'verktyget';
 
-import ScrollDetector from '../utils/scroll-detector';
+// import ScrollDetector from '../utils/scroll-detector';
 
 // Dev for new scroll-detection
 // import ScrollDetector from '../utils/scroll-detector';
@@ -9,8 +9,6 @@ import ScrollDetector from '../utils/scroll-detector';
 // Compare with Scrollmagic
 // import ScrollMagic from 'scrollmagic';
 // import 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators';
-
-
 
 
 class ScrollDetection extends EventDispatcher {
