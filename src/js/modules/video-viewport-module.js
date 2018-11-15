@@ -1,9 +1,7 @@
-// Vendor
-import TweenLite from 'gsap';
 
 // UTILS
 import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
-// import ScrollDetector from '../scroll-detector'; // in general module
+
 
 class VideoViewportModule extends EventDispatcher { // extends generalModule
 

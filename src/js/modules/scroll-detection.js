@@ -102,11 +102,6 @@ class ScrollDetection extends EventDispatcher {
 		// 
 		// // --------------------------------------------------------------------------------------------------
 		
-		// Nothing to load, dispatch direclty
-		var _this = this;
-		window.setTimeout(function() {
-			_this.dispatchEvent({type: 'loaded', target:_this});
-		}, 100);
 		
 	}
 	

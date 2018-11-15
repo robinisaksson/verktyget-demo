@@ -1,5 +1,5 @@
 // Vendor
-// import TweenLite from 'gsap';
+import {TweenLite} from 'gsap';
 
 // UTILS
 import {EventDispatcher, DOM, DeviceInfo, VideoLoader} from 'verktyget';
@@ -14,14 +14,19 @@ class VideoLoaderModule extends EventDispatcher {
 		
 		// Bind event
 		this.onVideoLoaded = this.onVideoLoaded.bind(this);
+		this.onPlayVideo = this.onPlayVideo.bind(this);
 		
 		// query DOM for relevant nodes
 		this.node = document.querySelector('.video-loader');
 		
 		
-		this.staticVideoNode = this.node.querySelector('.media');
+		this.videoNode = this.node.querySelector('.media');
+		this.playContainerNode = this.node.querySelector('.big-play-icon');
+		this.iconNode = this.playContainerNode.querySelector('.icons');
 		
-		var url = this.staticVideoNode.getAttribute('data-video-url');
+		this.playContainerNode.addEventListener('click', this.onPlayVideo);
+		
+		var url = this.videoNode.getAttribute('data-video-url');
 		
 		// Video loader example
 		// 1. Create new loader
@@ -38,23 +43,26 @@ class VideoLoaderModule extends EventDispatcher {
 		// Video is loaded
 		
 		// Store reference to video element
-		this.staticVideo = event.target.videoNode;
+		this.video = event.target.videoNode;
 		// Add to DOM
-		this.staticVideoNode.appendChild(this.staticVideo);
+		this.videoNode.appendChild(this.video);
 		// Show controls
-		this.staticVideo.setAttribute('controls', 'true');
+		this.video.setAttribute('controls', 'false');
+		this.video.controls = false;
 		
 		
 		this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
 	}
 	
-	onEnter() {
+	onPlayVideo(event) {
+		this.video.play();
+		
+		
+		TweenLite.to(this.iconNode, 0.5, { scale:0, transformOrigin:'50% 50%'});
+		TweenLite.to(this.playContainerNode, 1, {opacity:0});
 		
 	}
 	
-	onLeave() {
-		
-	}
 	
 	setScroll() {}
 	

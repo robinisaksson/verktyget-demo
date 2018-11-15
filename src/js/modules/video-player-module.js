@@ -1,5 +1,3 @@
-// Vendor
-// import TweenLite from 'gsap';
 
 // UTILS
 import {EventDispatcher, DOM, DeviceInfo, Video} from 'verktyget';
@@ -64,10 +62,10 @@ class VideoPlayerModule extends EventDispatcher { // extends generalModule
 	onVideoLoaded(event) {
 		
 		// Video is loaded
-		console.log('video loaded', event.target.videoNode.src);
+		// console.log('video loaded', event.target.videoNode.src);
 		
-		
-		this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
+		// Dispatch to main
+		this.dispatchEvent({type: 'loaded', target: this}); 
 	}
 	
 	onEnter() {}

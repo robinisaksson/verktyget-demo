@@ -1,5 +1,5 @@
 // Vendor
-import TweenLite from 'gsap';
+import {TweenLite} from 'gsap';
 
 // Verktyget
 import {EventDispatcher, DOM, DeviceInfo, ImageLoader, ScrollDetector} from 'verktyget';
@@ -19,7 +19,6 @@ class ParallaxAnimationModule extends EventDispatcher {
 		
 		this.mediaNodes = Array.from(this.node.querySelectorAll('.media')); // nodeList to [array]
 		this.imageLoaders = [];
-		this.imagesLoaded = 0;
 		
 		var i, media;
 		for (i = 0; media = this.mediaNodes[i]; i++) {
@@ -61,10 +60,6 @@ class ParallaxAnimationModule extends EventDispatcher {
 		img.src = event.target.image.src;
 		// console.log('loaded: ', img, event.target.image.src);
 		
-		if (this.imagesLoaded === this.mediaNodes.length-1) {
-			this.dispatchEvent({type: 'loaded', target: this}); // Dispatch to main
-		}
-		this.imagesLoaded++;
 	}
 	
 	

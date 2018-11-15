@@ -1,5 +1,5 @@
 // Vendor
-import TweenLite from 'gsap';
+import {TweenLite} from 'gsap';
 
 // UTILS
 import {AjaxRequest, EventDispatcher, DOM, DeviceInfo, URLManager} from 'verktyget';
@@ -52,7 +52,6 @@ class AjaxLoaderModule extends EventDispatcher {
 		this.node.appendChild(this.subpageHTML);
 		TweenLite.to(this.subpageHTML, 0.5, {delay:0.5, opacity:1});
 		
-		this.dispatchEvent({type: 'loaded', target: this});
 	}
 	
 	

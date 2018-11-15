@@ -99,9 +99,9 @@ class Main {
 	onModuleLoaded(event) {
 		
 		// All loaded
-		if (this.loadedModules === this.modules.length-1) {
+		if (this.loadedModules === this.modules.length-4) {
 			console.log('-------- ALL MODULES LOADED --------');
-			
+		
 			var i = this.modules.length;
 	    while(i--) {
 	      this.modules[i].setSize();

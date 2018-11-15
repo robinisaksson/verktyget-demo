@@ -1,16 +1,16 @@
 // Vendor
-import TweenLite from 'gsap';
+import {TweenLite} from 'gsap';
 
 // Verktyget
 import {EventDispatcher, DOM, DeviceInfo, ScrollDetector} from 'verktyget';
+
+
 
 class ScrollAnimationModule extends EventDispatcher {
 
 	constructor() {
 		
 		super();
-		
-		console.log('scroll animation');
 		
 		
 		this.onEnter = this.onEnter.bind(this);
@@ -50,25 +50,18 @@ class ScrollAnimationModule extends EventDispatcher {
 	
 		// ------------------------------------------------------------------------------------------
 		
-		// Nothing to load, dispatch direclty
-		var _this = this;
-		window.setTimeout(function() {
-			_this.dispatchEvent({type: 'loaded', target:_this});
-		}, 100);
 	}
 	
 	
 	onEnter(event) {
-		// console.log('Enter');
 		DOM.AddClass(this.middleLine, 'active');
 	}
 	onLeave(event) {
-		// console.log('Leave');
 		DOM.RemoveClass(this.middleLine, 'active');
 	}
 	
 	onProgress(event) {
-		
+		// console.log('set Progress scroll Animation: ', event.target.progress);
 		// Update progress of tweens		
 		this.scroll1.progress(event.target.progress);
 		this.scroll2.progress(event.target.progress);

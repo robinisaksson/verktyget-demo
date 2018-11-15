@@ -1,10 +1,52 @@
 .module.video-loader {
 	.media {
+		position: relative;
 		width: 68%;
 		margin-left: 16%;
 		video {
 			width: 100%;
 			height: auto;
+		}
+		.description {
+			position: absolute;
+			top: -16px;
+		}
+		
+		.big-play-icon {
+			background: rgba(0, 0, 0, 0.5);
+			position: absolute;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			z-index:1;
+			transition: background 600ms;
+			
+			&:hover {
+				cursor: pointer;
+				background: rgba(0, 0, 0, 0);
+				.icons {
+					transform: scale(1.2);
+				}
+			}
+			.icons {
+				position:absolute;
+				width:72px;
+				height:72px;
+				top: calc(50% - 36px);
+				left: calc(50% - 36px);
+				
+				transition: transform 300ms;
+				transform-origin: 50% 50%;
+				.icon {
+					fill-rule:evenodd;
+					clip-rule:evenodd;
+					fill:#FFFFFF;
+				}
+				.pause {
+					display:none;
+				}
+			}
 		}
 	}
 }

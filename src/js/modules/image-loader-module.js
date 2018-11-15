@@ -39,14 +39,6 @@ class ImageLoaderModule extends EventDispatcher {
 		this.dispatchEvent({type: 'loaded', target: this});
 	}
 	
-	onEnter() {
-		
-	}
-	
-	onLeave() {
-		
-	}
-	
 	setScroll() {}
 	
 	
