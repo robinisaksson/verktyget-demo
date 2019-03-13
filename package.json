@@ -39,10 +39,10 @@
     "cpx": "^1.5.0",
     "eslint": "^3.10.2",
     "http-server": "^0.11.1",
-    "livereload": "^0.6.0",
+    "livereload": "^0.7.0",
     "livereloadify-script": "^1.0.0",
     "stylus": "^0.54.5",
     "uglify-js": "^3.0.23",
-    "watchify": "^3.11.0"
+    "watchify": "^3.11.1"
   }
 }
