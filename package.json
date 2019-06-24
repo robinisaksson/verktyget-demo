@@ -37,7 +37,7 @@
     "browserify-shim": "^3.8.14",
     "core-js": "^2.5.1",
     "cpx": "^1.5.0",
-    "eslint": "^3.10.2",
+    "eslint": "^4.18.2",
     "http-server": "^0.11.1",
     "livereload": "^0.7.0",
     "livereloadify-script": "^1.0.0",
