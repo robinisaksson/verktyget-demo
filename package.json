@@ -22,7 +22,7 @@
   "browser": {},
   "browserify-shim": {},
   "dependencies": {
-    "gsap": "^1.20.3",
+    "gsap": "^3.6.0",
     "scrollmagic": "^2.0.5",
     "srcset": "^1.0.0",
     "verktyget": "0.0.45",
